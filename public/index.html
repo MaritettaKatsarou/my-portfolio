@@ -1,15 +1,22 @@
 <script type="text/javascript">
   (function(l) {
+    // Look for the special 'p=' marker we set in 404.html
     if (l.search.indexOf('p=/') !== -1) {
-      var decoded = l.search.slice(1).split('&').map(function(s) { 
-        return s.replace(/~and~/g, '&') 
-      }).filter(function(s) {
-        return s.slice(0, 2) !== 'p='
-      }).join('?');
+      // 1. Extract the path after 'p=/'
       var path = l.search.split('p=/')[1].split('&')[0];
-      window.history.replaceState(null, null,
-        l.pathname.slice(0, -1) + (path ? '/' + path : '') + (decoded ? '?' + decoded : '') + l.hash
-      );
+      
+      // 2. Clean up any other query parameters
+      var query = l.search.slice(1).split('&').filter(function(s) {
+        return s.slice(0, 2) !== 'p='
+      }).join('&');
+
+      // 3. Reconstruct the clean URL (e.g., /my-portfolio/works)
+      var newUrl = l.protocol + '//' + l.hostname + (l.port ? ':' + l.port : '') +
+                   l.pathname.slice(0, -1) + (path ? '/' + path : '') + 
+                   (query ? '?' + query : '') + l.hash;
+
+      // 4. Update the browser history BEFORE React loads
+      window.history.replaceState(null, null, newUrl);
     }
   }(window.location))
 </script>
