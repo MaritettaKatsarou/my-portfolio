@@ -1,17 +1,5 @@
 import React from 'react';
 import { HashRouter as BrowserRouter, Routes, Route, Link, useNavigate, useParams } from 'react-router-dom';
-
-export default function App() {
-  // 2. Remove 'basename' from the BrowserRouter tag
-  return (
-    <BrowserRouter> 
-      <div className="min-h-screen bg-white text-slate-900 flex flex-col">
-        {/* ... the rest of your code ... */}
-      </div>
-    </BrowserRouter>
-  );
-}
-
 import { Menu, X } from 'lucide-react';
 
 // --- 1. COMPONENTS ---
