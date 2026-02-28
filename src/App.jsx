@@ -42,7 +42,7 @@ const ProjectDetail = () => {
 
 export default function App() {
   return (
-    <BrowserRouter basename="/my-portfolio-2026">
+    <BrowserRouter basename="/my-portfolio">
       <div className="min-h-screen bg-white text-slate-900">
         <nav className="fixed top-0 w-full h-20 flex items-center justify-between px-8 md:px-16 bg-white/80 backdrop-blur-md z-50 border-b border-slate-50">
           <Link to="/" className="font-bold tracking-tighter text-xl">My-portfolio</Link>
