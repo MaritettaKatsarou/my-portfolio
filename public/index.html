@@ -1,11 +1,14 @@
 <script type="text/javascript">
   (function(l) {
-    if (l.search[1] === '/' ) {
+    if (l.search.indexOf('p=/') !== -1) {
       var decoded = l.search.slice(1).split('&').map(function(s) { 
         return s.replace(/~and~/g, '&') 
+      }).filter(function(s) {
+        return s.slice(0, 2) !== 'p='
       }).join('?');
+      var path = l.search.split('p=/')[1].split('&')[0];
       window.history.replaceState(null, null,
-          l.pathname.slice(0, -1) + decoded + l.hash
+        l.pathname.slice(0, -1) + (path ? '/' + path : '') + (decoded ? '?' + decoded : '') + l.hash
       );
     }
   }(window.location))

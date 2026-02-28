@@ -4,15 +4,14 @@
     <meta charset="utf-8">
     <title>My Portfolio</title>
     <script type="text/javascript">
-      // This script takes the current URL and redirects it back to index.html
-      // while preserving the path so React Router can read it.
-      var pathSegmentsToKeep = 1; 
-
+      // 1. Get the current path (e.g., /works/system-01)
+      // 2. Redirect to index.html but attach the path as a query string
+      var segmentCount = 1; // Set this to 1 if your URL is maritetta.github.io/my-portfolio/
       var l = window.location;
       l.replace(
         l.protocol + '//' + l.hostname + (l.port ? ':' + l.port : '') +
-        l.pathname.split('/').slice(0, 1 + pathSegmentsToKeep).join('/') + '/?/' +
-        l.pathname.split('/').slice(1 + pathSegmentsToKeep).join('/').replace(/&/g, '~and~') +
+        l.pathname.split('/').slice(0, 1 + segmentCount).join('/') + '/?p=/' +
+        l.pathname.split('/').slice(1 + segmentCount).join('/').replace(/&/g, '~and~') +
         (l.search ? '&' + l.search.slice(1).replace(/&/g, '~and~') : '') +
         l.hash
       );
