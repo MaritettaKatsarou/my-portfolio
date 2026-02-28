@@ -5,7 +5,7 @@ import { Menu, X } from 'lucide-react'; // Import the icons
 
 const Home = () => (
   <section className="animate-in fade-in slide-in-from-bottom-4 duration-1000">
-    <h1 className="text-7xl font-bold tracking-tighter mb-6">Systems Engineer <br/>meets <span className="text-blue-600">UX Design.</span></h1>
+    <h1 className="text-7xl font-bold tracking-tighter mb-6">Systems Engineer <br />meets <span className="text-blue-600">UX Design.</span></h1>
     <p className="text-xl text-slate-600 max-w-2xl leading-relaxed">
       I design products and systems that aren't just functional—they're intuitive. Currently bridging the gap between technical complexity and human experience.
     </p>
@@ -18,30 +18,30 @@ const Home = () => (
 
 const Works = ({ onProjectClick }) => {
   const projects = [
-    { 
-      id: 1, 
-      title: "System Architecture 01", 
+    {
+      id: 1,
+      title: "System Architecture 01",
       tags: "UX Design • Product Logic",
       description: "A deep dive into optimizing data flow for enterprise systems.",
       challenge: "Reducing latency in user-facing dashboards by 40%."
     },
-    { 
-      id: 2, 
-      title: "Data Visualization UI", 
+    {
+      id: 2,
+      title: "Data Visualization UI",
       tags: "React • Frontend Systems",
       description: "Creating an intuitive dashboard for complex analytics.",
       challenge: "Making thousands of data points digestible for non-technical users."
     },
-    { 
-      id: 3, 
-      title: "E-Commerce Logic", 
+    {
+      id: 3,
+      title: "E-Commerce Logic",
       tags: "UX/UI • User Flow",
       description: "Redesigning the checkout pipeline to reduce cart abandonment.",
       challenge: "Streamlining a 5-step process into a seamless 2-step flow."
     },
-    { 
-      id: 4, 
-      title: "API Dashboard", 
+    {
+      id: 4,
+      title: "API Dashboard",
       tags: "Systems Design • Tailwind",
       description: "A developer portal for managing API keys and documentation.",
       challenge: "Structuring technical documentation for maximum readability."
@@ -97,7 +97,7 @@ const ProjectDetail = ({ project, onBack }) => (
     <button onClick={onBack} className="text-xs font-mono uppercase tracking-widest text-blue-600 mb-8 flex items-center gap-2 hover:gap-4 transition-all">
       ← Back to Works
     </button>
-    
+
     <div className="grid grid-cols-1 md:grid-cols-2 gap-16">
       <div>
         <h2 className="text-5xl font-bold tracking-tighter mb-4">{project.title}</h2>
@@ -110,7 +110,7 @@ const ProjectDetail = ({ project, onBack }) => (
           </div>
         </div>
       </div>
-      
+
       <div className="space-y-8">
         <div className="aspect-video bg-slate-100 rounded-sm border border-slate-200 flex items-center justify-center text-slate-400 font-mono">
           [ MAIN PROJECT IMAGE ]
@@ -131,7 +131,7 @@ export default function App() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [selectedProject, setSelectedProject] = useState(null); // New state
 
-// Helper to open a project
+  // Helper to open a project
   const openProject = (projectData) => {
     setSelectedProject(projectData);
     setView('project-detail');
@@ -160,14 +160,12 @@ export default function App() {
         {/* Desktop Menu - Hidden on Mobile */}
         <div className="hidden md:flex gap-8 text-[11px] font-bold uppercase tracking-[0.2em] items-center">
           {navItems.map((item) => (
-            <button 
-              key={item.name} 
+            <button
+              key={item.name}
               onClick={() => setView(item.name)}
-              className={`transition-colors py-2 ${
-                view === item.name ? 'text-blue-600' : 'text-slate-400 hover:text-blue-600'
-              } ${
-                item.name === 'contact' ? 'border border-slate-900 px-4 rounded-full text-slate-900 ml-4' : ''
-              }`}
+              className={`transition-colors py-2 ${view === item.name ? 'text-blue-600' : 'text-slate-400 hover:text-blue-600'
+                } ${item.name === 'contact' ? 'border border-slate-900 px-4 rounded-full text-slate-900 ml-4' : ''
+                }`}
             >
               {item.label}
             </button>
@@ -184,8 +182,8 @@ export default function App() {
       {isMenuOpen && (
         <div className="fixed inset-0 bg-white z-40 flex flex-col items-center justify-center gap-8 animate-in fade-in zoom-in duration-300 md:hidden">
           {navItems.map((item) => (
-            <button 
-              key={item.name} 
+            <button
+              key={item.name}
               onClick={() => handleNavClick(item.name)}
               className="text-2xl font-bold uppercase tracking-widest text-slate-900"
             >
@@ -204,15 +202,53 @@ export default function App() {
 
         {/* The Detail Template View */}
         {view === 'project-detail' && (
-          <ProjectDetail 
-            project={selectedProject} 
-             onBack={() => setView('works')} 
+          <ProjectDetail
+            project={selectedProject}
+            onBack={() => setView('works')}
           />
         )}
 
       </main>
 
-      {/* Footer remains same... */}
+      {/* --- PROFESSIONAL FOOTER --- */}
+      <footer className="px-8 md:px-16 py-12 border-t border-slate-100 bg-white">
+        <div className="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-start gap-12">
+
+          {/* Brand & Status Section */}
+          <div className="space-y-4">
+            <div className="font-bold tracking-tighter text-lg">My-portfolio</div>
+            <div className="flex items-center gap-2">
+              <span className="relative flex h-2 w-2">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
+              </span>
+              <span className="text-[10px] font-mono text-slate-400 uppercase tracking-widest">
+                System Live // Athens, GR
+              </span>
+            </div>
+          </div>
+
+          {/* Navigation Links */}
+          <div className="grid grid-cols-2 gap-16">
+            <div className="flex flex-col gap-3">
+              <h4 className="text-[10px] font-bold text-slate-900 uppercase tracking-widest mb-2">Connect</h4>
+              <a href="https://linkedin.com/in/yourprofile" target="_blank" className="text-sm text-slate-500 hover:text-blue-600 transition-colors">LinkedIn</a>
+              <a href="https://github.com/yourusername" target="_blank" className="text-sm text-slate-500 hover:text-blue-600 transition-colors">GitHub</a>
+            </div>
+            <div className="flex flex-col gap-3">
+              <h4 className="text-[10px] font-bold text-slate-900 uppercase tracking-widest mb-2">Platform</h4>
+              <span className="text-sm text-slate-400">Vite + React</span>
+              <span className="text-sm text-slate-400">Tailwind CSS</span>
+            </div>
+          </div>
+        </div>
+
+        {/* Bottom Copyright Bar */}
+        <div className="max-w-6xl mx-auto mt-16 pt-8 border-t border-slate-50 flex justify-between items-center text-[10px] text-slate-300 font-mono uppercase tracking-[0.2em]">
+          <span>© 2026 All Rights Reserved</span>
+          <span>Designed with Systems Mindset</span>
+        </div>
+      </footer>
     </div>
   );
 }
