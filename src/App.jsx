@@ -79,12 +79,76 @@ const Contact = () => (
 const ProjectDetail = () => {
   const { projectId } = useParams();
   const navigate = useNavigate();
+
+  // This is your "Database" - ensure these IDs match the ones in your Works component
+  const projects = [
+    { 
+      id: 'system-01', 
+      title: "System Architecture 01", 
+      tags: "UX Design • Product Logic",
+      description: "A deep dive into optimizing data flow for enterprise systems. This project focused on creating a scalable infrastructure that remains invisible to the end user while handling high-velocity data streams.",
+      challenge: "Reducing latency in user-facing dashboards by 40% while maintaining real-time synchronization across global nodes."
+    },
+    { 
+      id: 'data-ui', 
+      title: "Data Visualization UI", 
+      tags: "React • Frontend Systems",
+      description: "A specialized interface designed to translate complex analytical datasets into actionable insights for executive stakeholders.",
+      challenge: "Managing state for over 10,000 concurrent data points without compromising frame rates or interactivity."
+    },
+    { 
+      id: 'ecom-logic', 
+      title: "E-Commerce Logic", 
+      tags: "UX/UI • User Flow",
+      description: "Redesigning the checkout pipeline to reduce cart abandonment through psychological friction reduction and optimized server-side validation.",
+      challenge: "Streamlining a complex 5-step legacy process into a seamless 2-step flow that increased conversion by 15%."
+    },
+    { 
+      id: 'api-dash', 
+      title: "API Dashboard", 
+      tags: "Systems Design • Tailwind",
+      description: "A developer-first portal focused on documentation accessibility and efficient token management for high-growth technical teams.",
+      challenge: "Structuring nested technical documentation for maximum readability while providing a 'one-click' environment setup tool."
+    }
+  ];
+
+  // Find the specific project based on the URL parameter
+  const project = projects.find(p => p.id === projectId);
+
+  // If the URL is wrong and project isn't found, show a simple error
+  if (!project) return <div className="pt-20 text-center font-mono uppercase text-slate-400">Project Not Found</div>;
+
   return (
-    <section className="animate-in fade-in slide-in-from-bottom-4">
-      <button onClick={() => navigate('/works')} className="text-xs font-mono text-blue-600 mb-8 tracking-widest uppercase">← Back to Works</button>
-      <h2 className="text-5xl font-bold tracking-tighter mb-4 uppercase italic">{projectId.replace('-', ' ')}</h2>
-      <div className="aspect-video bg-slate-100 border border-slate-200 rounded-sm flex items-center justify-center text-slate-400 font-mono">
-        CONTENT_PLACEHOLDER_FOR_{projectId}
+    <section className="animate-in fade-in slide-in-from-bottom-4 duration-700">
+      <button 
+        onClick={() => navigate('/works')} 
+        className="text-xs font-mono uppercase tracking-widest text-blue-600 mb-8 flex items-center gap-2 hover:gap-4 transition-all"
+      >
+        ← Back to Works
+      </button>
+      
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-16">
+        <div>
+          <h2 className="text-5xl font-bold tracking-tighter mb-4">{project.title}</h2>
+          <p className="text-slate-500 font-mono mb-8">{project.tags}</p>
+          <div className="space-y-6 text-slate-700 leading-relaxed">
+            <p>{project.description}</p>
+            <div className="pt-6 border-t border-slate-100">
+              <h4 className="font-bold text-sm uppercase mb-2">Technical Challenge</h4>
+              <p className="text-sm">{project.challenge}</p>
+            </div>
+          </div>
+        </div>
+        
+        <div className="space-y-8">
+          <div className="aspect-video bg-slate-100 rounded-sm border border-slate-200 flex items-center justify-center text-slate-400 font-mono">
+            [ {project.id.toUpperCase()}_MAIN_IMAGE ]
+          </div>
+          <div className="grid grid-cols-2 gap-4">
+            <div className="aspect-square bg-slate-50 rounded-sm border border-slate-100"></div>
+            <div className="aspect-square bg-slate-50 rounded-sm border border-slate-100"></div>
+          </div>
+        </div>
       </div>
     </section>
   );
