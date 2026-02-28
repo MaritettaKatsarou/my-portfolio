@@ -177,7 +177,7 @@ export default function App() {
     { name: '/', label: 'home' },
     { name: '/works', label: 'works' },
     { name: '/about', label: 'about me' },
-    { name: '/test', label: 'test' }
+    { name: '/test', label: 'test' },
     { name: '/contact', label: 'contact' }
   ];
 
