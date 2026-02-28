@@ -232,8 +232,8 @@ export default function App() {
           <div className="grid grid-cols-2 gap-16">
             <div className="flex flex-col gap-3">
               <h4 className="text-[10px] font-bold text-slate-900 uppercase tracking-widest mb-2">Connect</h4>
-              <a href="https://linkedin.com/in/yourprofile" target="_blank" className="text-sm text-slate-500 hover:text-blue-600 transition-colors">LinkedIn</a>
-              <a href="https://github.com/yourusername" target="_blank" className="text-sm text-slate-500 hover:text-blue-600 transition-colors">GitHub</a>
+              <a href="https://www.linkedin.com/in/maritettakatsarou/" target="_blank" className="text-sm text-slate-500 hover:text-blue-600 transition-colors">LinkedIn</a>
+              <a href="https://github.com/MaritettaKatsarou" target="_blank" className="text-sm text-slate-500 hover:text-blue-600 transition-colors">GitHub</a>
             </div>
             <div className="flex flex-col gap-3">
               <h4 className="text-[10px] font-bold text-slate-900 uppercase tracking-widest mb-2">Platform</h4>
