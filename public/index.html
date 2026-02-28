@@ -1,22 +1,14 @@
-<script type="text/javascript">
-  (function(l) {
-    // Look for the special 'p=' marker we set in 404.html
-    if (l.search.indexOf('p=/') !== -1) {
-      // 1. Extract the path after 'p=/'
-      var path = l.search.split('p=/')[1].split('&')[0];
-      
-      // 2. Clean up any other query parameters
-      var query = l.search.slice(1).split('&').filter(function(s) {
-        return s.slice(0, 2) !== 'p='
-      }).join('&');
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>my-portfolio</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>
 
-      // 3. Reconstruct the clean URL (e.g., /my-portfolio/works)
-      var newUrl = l.protocol + '//' + l.hostname + (l.port ? ':' + l.port : '') +
-                   l.pathname.slice(0, -1) + (path ? '/' + path : '') + 
-                   (query ? '?' + query : '') + l.hash;
-
-      // 4. Update the browser history BEFORE React loads
-      window.history.replaceState(null, null, newUrl);
-    }
-  }(window.location))
-</script>
