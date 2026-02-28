@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Menu, X } from 'lucide-react'; // Import the icons
 
 // --- COMPONENTS ---
 
@@ -24,7 +25,27 @@ const Works = ({ onProjectClick }) => {
       description: "A deep dive into optimizing data flow for enterprise systems.",
       challenge: "Reducing latency in user-facing dashboards by 40%."
     },
-    // Add more project objects here...
+    { 
+      id: 2, 
+      title: "Data Visualization UI", 
+      tags: "React • Frontend Systems",
+      description: "Creating an intuitive dashboard for complex analytics.",
+      challenge: "Making thousands of data points digestible for non-technical users."
+    },
+    { 
+      id: 3, 
+      title: "E-Commerce Logic", 
+      tags: "UX/UI • User Flow",
+      description: "Redesigning the checkout pipeline to reduce cart abandonment.",
+      challenge: "Streamlining a 5-step process into a seamless 2-step flow."
+    },
+    { 
+      id: 4, 
+      title: "API Dashboard", 
+      tags: "Systems Design • Tailwind",
+      description: "A developer portal for managing API keys and documentation.",
+      challenge: "Structuring technical documentation for maximum readability."
+    }
   ];
 
   return (
@@ -105,8 +126,6 @@ const ProjectDetail = ({ project, onBack }) => (
 
 // --- MAIN APP ENTRY ---
 
-import { Menu, X } from 'lucide-react'; // Import the icons
-
 export default function App() {
   const [view, setView] = useState('home');
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -179,7 +198,7 @@ export default function App() {
       {/* Dynamic Content Area */}
       <main className="pt-40 px-8 md:px-16 pb-20 max-w-6xl mx-auto">
         {view === 'home' && <Home />}
-        {view === 'works' && <Works />}
+        {view === 'works' && <Works onProjectClick={openProject} />}
         {view === 'about' && <About />}
         {view === 'contact' && <Contact />}
 
