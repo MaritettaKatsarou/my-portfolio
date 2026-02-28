@@ -70,7 +70,7 @@ export default function App() {
       <nav className="fixed top-0 w-full h-20 flex items-center justify-between px-8 md:px-16 bg-white/80 backdrop-blur-sm z-50">
         <div className="font-bold tracking-tighter text-xl cursor-pointer" onClick={() => setView('home')}>M-TEST-PAGE</div>
         <div className="flex gap-8 text-[11px] font-bold uppercase tracking-[0.2em]">
-          {['home', 'works', 'about me', 'contact'].map((item) => (
+          {['home', 'works', 'about me', 'contact', 'i'].map((item) => (
             <button 
               key={item} 
               onClick={() => setView(item)}
@@ -88,6 +88,7 @@ export default function App() {
         {view === 'works' && <Works />}
         {view === 'about' && <About />}
         {view === 'contact' && <Contact />}
+        {view === 'i' && <i />}
       </main>
 
       {/* Simple Footer */}
