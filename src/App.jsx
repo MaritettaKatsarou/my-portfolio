@@ -157,22 +157,62 @@ const ProjectDetail = () => {
 // --- 2. MAIN APP ENTRY ---
 
 export default function App() {
+  const [isMenuOpen, setIsMenuOpen] = React.useState(false); // Restore mobile state
+
+  const navItems = [
+    { name: '/', label: 'home' },
+    { name: '/works', label: 'works' },
+    { name: '/about', label: 'about me' },
+    { name: '/contact', label: 'contact' }
+  ];
+
+  const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
+  const closeMenu = () => setIsMenuOpen(false);
+
   return (
     <BrowserRouter basename="/my-portfolio">
       <div className="min-h-screen bg-white text-slate-900 selection:bg-blue-100 flex flex-col">
         
-        {/* Navigation */}
+        {/* --- NAVIGATION BAR --- */}
         <nav className="fixed top-0 w-full h-20 flex items-center justify-between px-8 md:px-16 bg-white/80 backdrop-blur-md z-50 border-b border-slate-50">
-          <Link to="/" className="font-bold tracking-tighter text-xl">My-portfolio</Link>
+          <Link to="/" onClick={closeMenu} className="font-bold tracking-tighter text-xl">My-portfolio</Link>
+
+          {/* Desktop Menu: Hidden on small screens */}
           <div className="hidden md:flex gap-8 text-[11px] font-bold uppercase tracking-[0.2em] items-center">
-            <Link to="/" className="text-slate-400 hover:text-blue-600 transition-colors">Home</Link>
-            <Link to="/works" className="text-slate-400 hover:text-blue-600 transition-colors">Works</Link>
-            <Link to="/about" className="text-slate-400 hover:text-blue-600 transition-colors">About Me</Link>
-            <Link to="/contact" className="border border-slate-900 px-4 py-2 rounded-full text-slate-900 hover:bg-slate-900 hover:text-white transition-all ml-4">Contact</Link>
+            {navItems.map((item) => (
+              <Link 
+                key={item.name} 
+                to={item.name} 
+                className={`transition-colors ${item.name === '/contact' ? 'border border-slate-900 px-4 py-2 rounded-full ml-4' : 'text-slate-400 hover:text-blue-600'}`}
+              >
+                {item.label}
+              </Link>
+            ))}
           </div>
+
+          {/* Mobile Toggle: Visible only on small screens */}
+          <button className="md:hidden p-2 text-slate-900 z-50" onClick={toggleMenu}>
+            {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
+          </button>
         </nav>
 
-        {/* Dynamic Content Area */}
+        {/* Mobile Menu Overlay */}
+        {isMenuOpen && (
+          <div className="fixed inset-0 bg-white z-40 flex flex-col items-center justify-center gap-8 animate-in fade-in zoom-in duration-300 md:hidden">
+            {navItems.map((item) => (
+              <Link 
+                key={item.name} 
+                to={item.name} 
+                onClick={closeMenu}
+                className="text-2xl font-bold uppercase tracking-widest text-slate-900"
+              >
+                {item.label}
+              </Link>
+            ))}
+          </div>
+        )}
+
+        {/* --- DYNAMIC CONTENT --- */}
         <main className="pt-40 px-8 md:px-16 pb-20 max-w-6xl mx-auto flex-grow w-full">
           <Routes>
             <Route path="/" element={<Home />} />
@@ -183,37 +223,8 @@ export default function App() {
           </Routes>
         </main>
 
-        {/* Footer */}
-        <footer className="px-8 md:px-16 py-12 border-t border-slate-100 bg-white">
-          <div className="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-start gap-12">
-            <div className="space-y-4">
-              <div className="font-bold tracking-tighter text-lg">My-portfolio</div>
-              <div className="flex items-center gap-2">
-                <span className="relative flex h-2 w-2">
-                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
-                  <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
-                </span>
-                <span className="text-[10px] font-mono text-slate-400 uppercase tracking-widest">System Live // Athens, GR</span>
-              </div>
-            </div>
-            <div className="grid grid-cols-2 gap-16 text-[10px] font-bold uppercase tracking-widest">
-              <div className="flex flex-col gap-3">
-                <span className="text-slate-900 mb-2">Connect</span>
-                <a href="#" className="text-slate-400 hover:text-blue-600 font-normal">LinkedIn</a>
-                <a href="#" className="text-slate-400 hover:text-blue-600 font-normal">GitHub</a>
-              </div>
-              <div className="flex flex-col gap-3">
-                <span className="text-slate-900 mb-2">Platform</span>
-                <span className="text-slate-400 font-normal underline decoration-blue-600/30">React Router v6</span>
-                <span className="text-slate-400 font-normal">Tailwind CSS</span>
-              </div>
-            </div>
-          </div>
-          <div className="max-w-6xl mx-auto mt-16 pt-8 border-t border-slate-50 flex justify-between items-center text-[10px] text-slate-300 font-mono uppercase tracking-[0.2em]">
-            <span>© 2026 Systems Design</span>
-            <span>Refreshes optimized</span>
-          </div>
-        </footer>
+        {/* --- FOOTER --- */}
+        <footer className="..."> {/* Keep your existing footer code here */} </footer>
       </div>
     </BrowserRouter>
   );
