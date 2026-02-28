@@ -1,44 +1,57 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { BrowserRouter, Routes, Route, Link, useNavigate, useParams } from 'react-router-dom';
-import { Menu, X } from 'lucide-react';
+import { Menu, X, LucideLink } from 'lucide-react';
 
-// --- COMPONENTS (Keep your Home, About, Contact components as they are) ---
+// --- 1. DEFINE ALL COMPONENTS FIRST ---
+
+const Home = () => (
+  <section className="animate-in fade-in slide-in-from-bottom-4 duration-1000">
+    <h1 className="text-7xl font-bold tracking-tighter mb-6">Systems Engineer <br/>meets <span className="text-blue-600">UX Design.</span></h1>
+    {/* ... rest of your home code */}
+  </section>
+);
+
+const About = () => (
+  <section className="grid grid-cols-1 md:grid-cols-2 gap-16 items-start animate-in fade-in">
+    {/* ... your aesthetic about page code */}
+  </section>
+);
+
+const Contact = () => (
+  <section className="animate-in fade-in">
+    {/* ... your contact code */}
+  </section>
+);
 
 const Works = () => {
   const projects = [
     { id: 'system-01', title: "System Architecture 01", tags: "UX Design • Product Logic" },
-    { id: 'data-ui', title: "Data Visualization UI", tags: "React • Frontend Systems" },
-    // ... add your other projects here
+    { id: 'data-ui', title: "Data Visualization UI", tags: "React • Frontend Systems" }
   ];
 
   return (
-    <section className="grid grid-cols-1 md:grid-cols-2 gap-12 animate-in fade-in">
+    <section className="grid grid-cols-1 md:grid-cols-2 gap-12">
       {projects.map((proj) => (
         <Link key={proj.id} to={`/works/${proj.id}`} className="group cursor-pointer">
-          <div className="aspect-video bg-slate-200 rounded-sm mb-4 overflow-hidden border border-slate-100 shadow-sm transition-all group-hover:shadow-md">
-            <div className="w-full h-full bg-gradient-to-br from-slate-100 to-slate-200 flex items-center justify-center text-slate-400 font-mono text-xs uppercase">View {proj.id}</div>
-          </div>
-          <h3 className="font-bold text-lg uppercase tracking-tight">{proj.title}</h3>
-          <p className="text-sm text-slate-500 font-mono">{proj.tags}</p>
+           {/* ... your works card code */}
         </Link>
       ))}
     </section>
   );
 };
 
-// --- DYNAMIC PROJECT DETAIL ---
 const ProjectDetail = () => {
-  const { projectId } = useParams(); // Grabs the ID from the URL
+  const { projectId } = useParams();
   const navigate = useNavigate();
-
   return (
-    <section className="animate-in fade-in slide-in-from-bottom-4">
-      <button onClick={() => navigate('/works')} className="text-xs font-mono text-blue-600 mb-8">← BACK TO WORKS</button>
-      <h2 className="text-5xl font-bold uppercase italic">Project: {projectId}</h2>
-      {/* Add your project details here */}
+    <section>
+      <button onClick={() => navigate('/works')}>← BACK</button>
+      <h1>Project: {projectId}</h1>
     </section>
   );
 };
+
+// --- 2. THE MAIN APP ENTRY (Uses the components defined above) ---
 
 export default function App() {
   return (
@@ -47,10 +60,10 @@ export default function App() {
         <nav className="fixed top-0 w-full h-20 flex items-center justify-between px-8 md:px-16 bg-white/80 backdrop-blur-md z-50 border-b border-slate-50">
           <Link to="/" className="font-bold tracking-tighter text-xl">My-portfolio</Link>
           <div className="hidden md:flex gap-8 text-[11px] font-bold uppercase tracking-[0.2em]">
-            <Link to="/" className="hover:text-blue-600">Home</Link>
-            <Link to="/works" className="hover:text-blue-600">Works</Link>
-            <Link to="/about" className="hover:text-blue-600">About Me</Link>
-            <Link to="/contact" className="border border-slate-900 px-4 py-2 rounded-full ml-4">Contact</Link>
+            <Link to="/">Home</Link>
+            <Link to="/works">Works</Link>
+            <Link to="/about">About Me</Link>
+            <Link to="/contact">Contact</Link>
           </div>
         </nav>
 
