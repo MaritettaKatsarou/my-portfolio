@@ -15,20 +15,32 @@ const Home = () => (
   </section>
 );
 
-const Works = () => (
-  <section className="grid grid-cols-1 md:grid-cols-2 gap-12 animate-in fade-in duration-700">
-    {[1, 2, 3, 4].map((i) => (
-      <div key={i} className="group cursor-pointer">
-        <div className="aspect-video bg-slate-200 rounded-sm mb-4 overflow-hidden border border-slate-100 shadow-sm transition-all group-hover:shadow-md">
-          {/* Placeholder for project image */}
-          <div className="w-full h-full bg-gradient-to-br from-slate-100 to-slate-200 flex items-center justify-center text-slate-400 font-mono text-xs">PROJECT_0{i}_PREVIEW</div>
+const Works = ({ onProjectClick }) => {
+  const projects = [
+    { 
+      id: 1, 
+      title: "System Architecture 01", 
+      tags: "UX Design • Product Logic",
+      description: "A deep dive into optimizing data flow for enterprise systems.",
+      challenge: "Reducing latency in user-facing dashboards by 40%."
+    },
+    // Add more project objects here...
+  ];
+
+  return (
+    <section className="grid grid-cols-1 md:grid-cols-2 gap-12 animate-in fade-in">
+      {projects.map((proj) => (
+        <div key={proj.id} onClick={() => onProjectClick(proj)} className="group cursor-pointer">
+          <div className="aspect-video bg-slate-200 rounded-sm mb-4 overflow-hidden border border-slate-100 shadow-sm transition-all group-hover:shadow-md">
+            <div className="w-full h-full bg-gradient-to-br from-slate-100 to-slate-200 flex items-center justify-center text-slate-400 font-mono text-xs">VIEW_PROJECT_0{proj.id}</div>
+          </div>
+          <h3 className="font-bold text-lg uppercase tracking-tight">{proj.title}</h3>
+          <p className="text-sm text-slate-500 font-mono">{proj.tags}</p>
         </div>
-        <h3 className="font-bold text-lg uppercase tracking-tight">System Architecture 0{i}</h3>
-        <p className="text-sm text-slate-500 font-mono">UX Design • Product Logic • React</p>
-      </div>
-    ))}
-  </section>
-);
+      ))}
+    </section>
+  );
+};
 
 const About = () => (
   <section className="max-w-2xl animate-in fade-in duration-700">
@@ -59,6 +71,38 @@ const Contact = () => (
   </section>
 );
 
+const ProjectDetail = ({ project, onBack }) => (
+  <section className="animate-in fade-in slide-in-from-bottom-4 duration-700">
+    <button onClick={onBack} className="text-xs font-mono uppercase tracking-widest text-blue-600 mb-8 flex items-center gap-2 hover:gap-4 transition-all">
+      ← Back to Works
+    </button>
+    
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-16">
+      <div>
+        <h2 className="text-5xl font-bold tracking-tighter mb-4">{project.title}</h2>
+        <p className="text-slate-500 font-mono mb-8">{project.tags}</p>
+        <div className="space-y-6 text-slate-700 leading-relaxed">
+          <p>{project.description}</p>
+          <div className="pt-6 border-t border-slate-100">
+            <h4 className="font-bold text-sm uppercase mb-2">Technical Challenge</h4>
+            <p className="text-sm">{project.challenge}</p>
+          </div>
+        </div>
+      </div>
+      
+      <div className="space-y-8">
+        <div className="aspect-video bg-slate-100 rounded-sm border border-slate-200 flex items-center justify-center text-slate-400 font-mono">
+          [ MAIN PROJECT IMAGE ]
+        </div>
+        <div className="grid grid-cols-2 gap-4">
+          <div className="aspect-square bg-slate-50 rounded-sm border border-slate-100"></div>
+          <div className="aspect-square bg-slate-50 rounded-sm border border-slate-100"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+);
+
 // --- MAIN APP ENTRY ---
 
 import { Menu, X } from 'lucide-react'; // Import the icons
@@ -66,6 +110,14 @@ import { Menu, X } from 'lucide-react'; // Import the icons
 export default function App() {
   const [view, setView] = useState('home');
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [selectedProject, setSelectedProject] = useState(null); // New state
+
+// Helper to open a project
+  const openProject = (projectData) => {
+    setSelectedProject(projectData);
+    setView('project-detail');
+    window.scrollTo(0, 0); // Reset scroll to top
+  };
 
   const navItems = [
     { name: 'home', label: 'home' },
@@ -130,6 +182,15 @@ export default function App() {
         {view === 'works' && <Works />}
         {view === 'about' && <About />}
         {view === 'contact' && <Contact />}
+
+        {/* The Detail Template View */}
+        {view === 'project-detail' && (
+          <ProjectDetail 
+            project={selectedProject} 
+             onBack={() => setView('works')} 
+          />
+        )}
+
       </main>
 
       {/* Footer remains same... */}
