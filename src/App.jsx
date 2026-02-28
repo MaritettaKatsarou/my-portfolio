@@ -64,7 +64,7 @@ const Works = ({ onProjectClick }) => {
 };
 
 const About = () => (
-  <section className="grid grid-cols-1 md:grid-cols-2 gap-16 items-start animate-in fade-in duration-700">
+  <section className="grid grid-cols-1 md:grid-cols-2 gap-12 items-start animate-in fade-in duration-700">
     
     {/* Left Side: Content */}
     <div className="max-w-2xl">
