@@ -61,26 +61,68 @@ const Contact = () => (
 
 // --- MAIN APP ENTRY ---
 
+import { Menu, X } from 'lucide-react'; // Import the icons
+
 export default function App() {
   const [view, setView] = useState('home');
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  const navItems = [
+    { name: 'home', label: 'home' },
+    { name: 'works', label: 'works' },
+    { name: 'about', label: 'about me' },
+    { name: 'contact', label: 'contact' }
+  ];
+
+  const handleNavClick = (viewName) => {
+    setView(viewName);
+    setIsMenuOpen(false); // Close mobile menu when a link is clicked
+  };
 
   return (
     <div className="min-h-screen bg-white text-slate-900 selection:bg-blue-100">
-      {/* Navigation Bar */}
-      <nav className="fixed top-0 w-full h-20 flex items-center justify-between px-8 md:px-16 bg-white/80 backdrop-blur-sm z-50">
-        <div className="font-bold tracking-tighter text-xl cursor-pointer" onClick={() => setView('home')}>M-TEST-PAGE</div>
-        <div className="flex gap-8 text-[11px] font-bold uppercase tracking-[0.2em]">
-          {['home', 'works', 'about me', 'contact', 'i'].map((item) => (
+      <nav className="fixed top-0 w-full h-20 flex items-center justify-between px-8 md:px-16 bg-white/80 backdrop-blur-md z-50 border-b border-slate-50">
+        <div className="font-bold tracking-tighter text-xl cursor-pointer" onClick={() => handleNavClick('home')}>
+          MARITETTA K.
+        </div>
+
+        {/* Desktop Menu - Hidden on Mobile */}
+        <div className="hidden md:flex gap-8 text-[11px] font-bold uppercase tracking-[0.2em] items-center">
+          {navItems.map((item) => (
             <button 
-              key={item} 
-              onClick={() => setView(item)}
-              className={`hover:text-blue-600 transition-colors ${view === item ? 'text-blue-600' : 'text-slate-400'}`}
+              key={item.name} 
+              onClick={() => setView(item.name)}
+              className={`transition-colors py-2 ${
+                view === item.name ? 'text-blue-600' : 'text-slate-400 hover:text-blue-600'
+              } ${
+                item.name === 'contact' ? 'border border-slate-900 px-4 rounded-full text-slate-900 ml-4' : ''
+              }`}
             >
-              {item}
+              {item.label}
             </button>
           ))}
         </div>
+
+        {/* Mobile Menu Toggle - Hidden on Desktop */}
+        <button className="md:hidden p-2 text-slate-900" onClick={() => setIsMenuOpen(!isMenuOpen)}>
+          {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
+        </button>
       </nav>
+
+      {/* Mobile Menu Overlay */}
+      {isMenuOpen && (
+        <div className="fixed inset-0 bg-white z-40 flex flex-col items-center justify-center gap-8 animate-in fade-in zoom-in duration-300 md:hidden">
+          {navItems.map((item) => (
+            <button 
+              key={item.name} 
+              onClick={() => handleNavClick(item.name)}
+              className="text-2xl font-bold uppercase tracking-widest text-slate-900"
+            >
+              {item.label}
+            </button>
+          ))}
+        </div>
+      )}
 
       {/* Dynamic Content Area */}
       <main className="pt-40 px-8 md:px-16 pb-20 max-w-6xl mx-auto">
@@ -88,14 +130,9 @@ export default function App() {
         {view === 'works' && <Works />}
         {view === 'about' && <About />}
         {view === 'contact' && <Contact />}
-        {view === 'i' && <i />}
       </main>
 
-      {/* Simple Footer */}
-      <footer className="px-8 md:px-16 py-8 border-t border-slate-50 text-[10px] text-slate-400 font-mono flex justify-between uppercase tracking-widest">
-        <span>© 2026 Systems Design Portfolio</span>
-        <span>Built with Vite + React</span>
-      </footer>
+      {/* Footer remains same... */}
     </div>
   );
 }
