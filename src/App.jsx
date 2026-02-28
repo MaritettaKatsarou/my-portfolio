@@ -1,4 +1,5 @@
 import React from 'react';
+// Use HashRouter to fix the GitHub Pages 404 refresh error
 import { HashRouter as BrowserRouter, Routes, Route, Link, useNavigate, useParams } from 'react-router-dom';
 import { Menu, X } from 'lucide-react';
 
@@ -70,7 +71,7 @@ const Contact = () => (
   <section className="animate-in fade-in duration-700">
     <h2 className="text-4xl font-bold mb-4 tracking-tighter">Let's build a better system.</h2>
     <p className="text-slate-500 mb-10">Reach out for collaborations or just a chat about product design.</p>
-    <a href="mailto:hello@yourname.com" className="text-2xl font-medium border-b-2 border-blue-600 pb-1 hover:text-blue-600 transition-all">
+    <a href="mailto:hello@yourdomain.com" className="text-2xl font-medium border-b-2 border-blue-600 pb-1 hover:text-blue-600 transition-all">
       hello@yourdomain.com
     </a>
   </section>
@@ -80,74 +81,29 @@ const ProjectDetail = () => {
   const { projectId } = useParams();
   const navigate = useNavigate();
 
-  // This is your "Database" - ensure these IDs match the ones in your Works component
   const projects = [
-    {
-      id: 'system-01',
-      title: "System Architecture 01",
-      tags: "UX Design • Product Logic",
-      description: "A deep dive into optimizing data flow for enterprise systems. This project focused on creating a scalable infrastructure that remains invisible to the end user while handling high-velocity data streams.",
-      challenge: "Reducing latency in user-facing dashboards by 40% while maintaining real-time synchronization across global nodes."
-    },
-    {
-      id: 'data-ui',
-      title: "Data Visualization UI",
-      tags: "React • Frontend Systems",
-      description: "A specialized interface designed to translate complex analytical datasets into actionable insights for executive stakeholders.",
-      challenge: "Managing state for over 10,000 concurrent data points without compromising frame rates or interactivity."
-    },
-    {
-      id: 'ecom-logic',
-      title: "E-Commerce Logic",
-      tags: "UX/UI • User Flow",
-      description: "Redesigning the checkout pipeline to reduce cart abandonment through psychological friction reduction and optimized server-side validation.",
-      challenge: "Streamlining a complex 5-step legacy process into a seamless 2-step flow that increased conversion by 15%."
-    },
-    {
-      id: 'api-dash',
-      title: "API Dashboard",
-      tags: "Systems Design • Tailwind",
-      description: "A developer-first portal focused on documentation accessibility and efficient token management for high-growth technical teams.",
-      challenge: "Structuring nested technical documentation for maximum readability while providing a 'one-click' environment setup tool."
-    }
+    { id: 'system-01', title: "System Architecture 01", tags: "UX Design • Product Logic", description: "Optimization of data flow for enterprise systems.", challenge: "Reducing latency by 40%." },
+    { id: 'data-ui', title: "Data Visualization UI", tags: "React • Frontend Systems", description: "Analytical datasets into actionable insights.", challenge: "Managing 10,000 data points." },
+    { id: 'ecom-logic', title: "E-Commerce Logic", tags: "UX/UI • User Flow", description: "Redesigning checkout pipeline.", challenge: "Streamlining 5-step to 2-step flow." },
+    { id: 'api-dash', title: "API Dashboard", tags: "Systems Design • Tailwind", description: "Developer-first portal.", challenge: "Structuring documentation accessibility." }
   ];
 
-  // Find the specific project based on the URL parameter
   const project = projects.find(p => p.id === projectId);
-
-  // If the URL is wrong and project isn't found, show a simple error
   if (!project) return <div className="pt-20 text-center font-mono uppercase text-slate-400">Project Not Found</div>;
 
   return (
     <section className="animate-in fade-in slide-in-from-bottom-4 duration-700">
-      <button
-        onClick={() => navigate('/works')}
-        className="text-xs font-mono uppercase tracking-widest text-blue-600 mb-8 flex items-center gap-2 hover:gap-4 transition-all"
-      >
+      <button onClick={() => navigate('/works')} className="text-xs font-mono uppercase tracking-widest text-blue-600 mb-8 flex items-center gap-2 hover:gap-4 transition-all">
         ← Back to Works
       </button>
-
       <div className="grid grid-cols-1 md:grid-cols-2 gap-16">
         <div>
           <h2 className="text-5xl font-bold tracking-tighter mb-4">{project.title}</h2>
           <p className="text-slate-500 font-mono mb-8">{project.tags}</p>
-          <div className="space-y-6 text-slate-700 leading-relaxed">
-            <p>{project.description}</p>
-            <div className="pt-6 border-t border-slate-100">
-              <h4 className="font-bold text-sm uppercase mb-2">Technical Challenge</h4>
-              <p className="text-sm">{project.challenge}</p>
-            </div>
-          </div>
+          <p className="text-slate-700 leading-relaxed">{project.description}</p>
         </div>
-
-        <div className="space-y-8">
-          <div className="aspect-video bg-slate-100 rounded-sm border border-slate-200 flex items-center justify-center text-slate-400 font-mono">
-            [ {project.id.toUpperCase()}_MAIN_IMAGE ]
-          </div>
-          <div className="grid grid-cols-2 gap-4">
-            <div className="aspect-square bg-slate-50 rounded-sm border border-slate-100"></div>
-            <div className="aspect-square bg-slate-50 rounded-sm border border-slate-100"></div>
-          </div>
+        <div className="aspect-video bg-slate-100 rounded-sm border border-slate-200 flex items-center justify-center text-slate-400 font-mono">
+          [ {project.id.toUpperCase()}_MAIN_IMAGE ]
         </div>
       </div>
     </section>
@@ -160,9 +116,8 @@ const Test = () => (
     <div className="p-8 border border-dashed border-slate-200 rounded-lg bg-slate-50">
       <p className="font-mono text-sm text-slate-500 uppercase tracking-widest mb-4">// Debug Console</p>
       <ul className="space-y-2 text-slate-700">
-        <li>• Router Status: <span className="text-green-500 font-bold underline">Active</span></li>
-        <li>• Responsiveness: <span className="text-green-500 font-bold underline">Checked</span></li>
-        <li>• Deployment Pipeline: <span className="text-green-500 font-bold underline">Ready</span></li>
+        <li>• Router Status: <span className="text-green-500 font-bold underline">Active (HashRouter)</span></li>
+        <li>• Responsiveness: <span className="text-green-500 font-bold underline">Verified</span></li>
       </ul>
     </div>
   </section>
@@ -171,7 +126,7 @@ const Test = () => (
 // --- 2. MAIN APP ENTRY ---
 
 export default function App() {
-  const [isMenuOpen, setIsMenuOpen] = React.useState(false); // Restore mobile state
+  const [isMenuOpen, setIsMenuOpen] = React.useState(false);
 
   const navItems = [
     { name: '/', label: 'home' },
@@ -185,14 +140,43 @@ export default function App() {
   const closeMenu = () => setIsMenuOpen(false);
 
   return (
-    <BrowserRouter> 
+    <BrowserRouter>
       <div className="min-h-screen bg-white text-slate-900 selection:bg-blue-100 flex flex-col">
-        
+
         {/* --- NAVIGATION BAR --- */}
         <nav className="fixed top-0 w-full h-20 flex items-center justify-between px-8 md:px-16 bg-white/80 backdrop-blur-md z-50 border-b border-slate-50">
           <Link to="/" onClick={closeMenu} className="font-bold tracking-tighter text-xl">My-portfolio</Link>
-          {/* ... (rest of your nav code) */}
+
+          {/* Desktop Menu */}
+          <div className="hidden md:flex gap-8 text-[11px] font-bold uppercase tracking-[0.2em] items-center">
+            {navItems.map((item) => (
+              <Link
+                key={item.name}
+                to={item.name}
+                onClick={closeMenu}
+                className={`transition-colors ${item.name === '/contact' ? 'border border-slate-900 px-4 py-2 rounded-full ml-4' : 'text-slate-400 hover:text-blue-600'}`}
+              >
+                {item.label}
+              </Link>
+            ))}
+          </div>
+
+          {/* Mobile Toggle */}
+          <button className="md:hidden p-2 text-slate-900 z-50" onClick={toggleMenu}>
+            {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
+          </button>
         </nav>
+
+        {/* Mobile Menu Overlay */}
+        {isMenuOpen && (
+          <div className="fixed inset-0 bg-white z-40 flex flex-col items-center justify-center gap-8 animate-in fade-in zoom-in duration-300 md:hidden">
+            {navItems.map((item) => (
+              <Link key={item.name} to={item.name} onClick={closeMenu} className="text-2xl font-bold uppercase tracking-widest text-slate-900">
+                {item.label}
+              </Link>
+            ))}
+          </div>
+        )}
 
         {/* --- DYNAMIC CONTENT --- */}
         <main className="pt-40 px-8 md:px-16 pb-20 max-w-6xl mx-auto flex-grow w-full">
@@ -206,9 +190,38 @@ export default function App() {
           </Routes>
         </main>
 
-        {/* --- FOOTER --- */}
-        {/* ... (rest of your footer code) */}
-        
+        {/* --- PROFESSIONAL FOOTER --- */}
+        <footer className="px-8 md:px-16 py-12 border-t border-slate-100 bg-white mt-auto">
+          <div className="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-start gap-12">
+            <div className="space-y-4">
+              <div className="font-bold tracking-tighter text-lg">My-portfolio</div>
+              <div className="flex items-center gap-2">
+                <span className="relative flex h-2 w-2">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+                  <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
+                </span>
+                <span className="text-[10px] font-mono text-slate-400 uppercase tracking-widest">System Live // Athens, GR</span>
+              </div>
+            </div>
+            <div className="grid grid-cols-2 gap-8 md:gap-16 w-full md:w-auto">
+              <div className="flex flex-col gap-3">
+                <h4 className="text-[10px] font-bold text-slate-900 uppercase tracking-widest mb-2">Connect</h4>
+                <a href="https://linkedin.com/in/maritettakatsarou" target="_blank" rel="noreferrer" className="text-sm text-slate-500 hover:text-blue-600 transition-colors">LinkedIn</a>
+                <a href="https://github.com/MaritettaKatsarou" target="_blank" rel="noreferrer" className="text-sm text-slate-500 hover:text-blue-600 transition-colors">GitHub</a>
+              </div>
+              <div className="flex flex-col gap-3">
+                <h4 className="text-[10px] font-bold text-slate-900 uppercase tracking-widest mb-2">Platform</h4>
+                <span className="text-sm text-slate-400">Vite + React</span>
+                <span className="text-sm text-slate-400">Tailwind CSS</span>
+              </div>
+            </div>
+          </div>
+          <div className="max-w-6xl mx-auto mt-16 pt-8 border-t border-slate-50 flex flex-col md:flex-row justify-between items-center gap-4 text-[10px] text-slate-300 font-mono uppercase tracking-[0.2em]">
+            <span>© 2026 All Rights Reserved</span>
+            <span>Designed with Systems Mindset</span>
+          </div>
+        </footer>
+
       </div>
     </BrowserRouter>
   );
