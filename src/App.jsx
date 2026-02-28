@@ -83,7 +83,7 @@ export default function App() {
     <div className="min-h-screen bg-white text-slate-900 selection:bg-blue-100">
       <nav className="fixed top-0 w-full h-20 flex items-center justify-between px-8 md:px-16 bg-white/80 backdrop-blur-md z-50 border-b border-slate-50">
         <div className="font-bold tracking-tighter text-xl cursor-pointer" onClick={() => handleNavClick('home')}>
-          MARITETTA K.
+          My-portfolio
         </div>
 
         {/* Desktop Menu - Hidden on Mobile */}
