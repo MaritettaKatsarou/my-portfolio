@@ -154,6 +154,20 @@ const ProjectDetail = () => {
   );
 };
 
+const Test = () => (
+  <section className="animate-in fade-in slide-in-from-bottom-4 duration-700">
+    <h2 className="text-5xl font-bold tracking-tighter mb-8 italic text-blue-600">System Test Page</h2>
+    <div className="p-8 border border-dashed border-slate-200 rounded-lg bg-slate-50">
+      <p className="font-mono text-sm text-slate-500 uppercase tracking-widest mb-4">// Debug Console</p>
+      <ul className="space-y-2 text-slate-700">
+        <li>• Router Status: <span className="text-green-500 font-bold underline">Active</span></li>
+        <li>• Responsiveness: <span className="text-green-500 font-bold underline">Checked</span></li>
+        <li>• Deployment Pipeline: <span className="text-green-500 font-bold underline">Ready</span></li>
+      </ul>
+    </div>
+  </section>
+);
+
 // --- 2. MAIN APP ENTRY ---
 
 export default function App() {
@@ -163,6 +177,7 @@ export default function App() {
     { name: '/', label: 'home' },
     { name: '/works', label: 'works' },
     { name: '/about', label: 'about me' },
+    { name: '/test', label: 'test' }
     { name: '/contact', label: 'contact' }
   ];
 
@@ -219,6 +234,7 @@ export default function App() {
             <Route path="/works" element={<Works />} />
             <Route path="/works/:projectId" element={<ProjectDetail />} />
             <Route path="/about" element={<About />} />
+            <Route path="/test" element={<Test />} /> {/* Added this line */}
             <Route path="/contact" element={<Contact />} />
           </Routes>
         </main>
