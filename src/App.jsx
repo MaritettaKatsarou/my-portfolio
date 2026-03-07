@@ -1,9 +1,61 @@
 import React from 'react';
-// Use HashRouter to fix the GitHub Pages 404 refresh error
 import { HashRouter as BrowserRouter, Routes, Route, Link, useNavigate, useParams } from 'react-router-dom';
-import { Menu, X } from 'lucide-react';
+import { Menu, X, Folder, Clock, CheckCircle2, Layout } from 'lucide-react';
 
-// --- 1. COMPONENTS ---
+// --- 1. DATA ARCHITECTURE ---
+// Moving data to a constant so it's accessible by all components
+const ALL_PROJECTS = [
+  { 
+    id: 'fintech-app', 
+    title: "Fintech Mobile App Redesign", 
+    category: "Product Design", 
+    status: "Active", 
+    date: "Nov 6, 2025",
+    priority: "High",
+    progress: 72,
+    tasks: "18/25",
+    description: "Improve onboarding conversion and simplify complex banking flows for Gen-Z users.",
+    challenge: "Balancing banking security requirements with a 'frictionless' user experience."
+  },
+  { 
+    id: 'ai-platform', 
+    title: "AI Learning Platform", 
+    category: "EdTech", 
+    status: "Planned", 
+    date: "Nov 14, 2025",
+    priority: "Medium",
+    progress: 54,
+    tasks: "13/24",
+    description: "A redesign of the learning experience to support AI-driven curriculum personalization.",
+    challenge: "Designing a UI that explains AI decisions without overwhelming the student."
+  },
+  { 
+    id: 'ecom-audit', 
+    title: "E-commerce Admin Audit", 
+    category: "UX Audit", 
+    status: "Backlog", 
+    date: "Nov 6, 2025",
+    priority: "Medium",
+    progress: 65,
+    tasks: "11/17",
+    description: "Audit usability issues and propose UX improvements for retail management systems.",
+    challenge: "Identifying bottlenecks in the inventory management workflow."
+  },
+  { 
+    id: 'internal-pm', 
+    title: "Internal PM System", 
+    category: "Systems", 
+    status: "Completed", 
+    date: "Nov 6, 2025",
+    priority: "Low",
+    progress: 100,
+    tasks: "23/23",
+    description: "Improve task clarity, sprint visibility, and cross-team resource tracking.",
+    challenge: "Integrating legacy Jira data into a new, simplified custom dashboard."
+  }
+];
+
+// --- 2. COMPONENTS ---
 
 const Home = () => (
   <section className="animate-in fade-in slide-in-from-bottom-4 duration-1000">
@@ -19,28 +71,140 @@ const Home = () => (
 );
 
 const Works = () => {
-  const projects = [
-    { id: 'system-01', title: "System Architecture 01", tags: "UX Design • Product Logic" },
-    { id: 'data-ui', title: "Data Visualization UI", tags: "React • Frontend Systems" },
-    { id: 'ecom-logic', title: "E-Commerce Logic", tags: "UX/UI • User Flow" },
-    { id: 'api-dash', title: "API Dashboard", tags: "Systems Design • Tailwind" }
-  ];
+  const [filterCategory, setFilterCategory] = React.useState('All');
+  const [filterStatus, setFilterStatus] = React.useState('All');
+
+  const filteredProjects = ALL_PROJECTS.filter(proj => {
+    const catMatch = filterCategory === 'All' || proj.category === filterCategory;
+    const statMatch = filterStatus === 'All' || proj.status === filterStatus;
+    return catMatch && statMatch;
+  });
+
+  const categories = ['All', ...new Set(ALL_PROJECTS.map(p => p.category))];
+  const statuses = ['All', 'Active', 'Planned', 'Backlog', 'Completed'];
 
   return (
-    <section className="grid grid-cols-1 md:grid-cols-2 gap-12 animate-in fade-in">
-      {projects.map((proj) => (
-        <Link key={proj.id} to={`/works/${proj.id}`} className="group cursor-pointer">
-          <div className="aspect-video bg-slate-200 rounded-sm mb-4 overflow-hidden border border-slate-100 shadow-sm transition-all group-hover:shadow-md">
-            <div className="w-full h-full bg-gradient-to-br from-slate-100 to-slate-200 flex items-center justify-center text-slate-400 font-mono text-xs uppercase">VIEW_{proj.id}</div>
+    <div className="flex flex-col md:flex-row gap-12 animate-in fade-in">
+      {/* Sidebar Filters */}
+      <aside className="w-full md:w-64 space-y-8">
+        <div>
+          <h4 className="text-[10px] font-bold uppercase tracking-widest text-slate-400 mb-4 italic">Filter by Category</h4>
+          <div className="flex flex-col gap-2">
+            {categories.map(cat => (
+              <button 
+                key={cat} 
+                onClick={() => setFilterCategory(cat)}
+                className={`text-left text-sm py-1 transition-all ${filterCategory === cat ? 'text-blue-600 font-bold translate-x-1' : 'text-slate-500 hover:text-slate-900'}`}
+              >
+                {cat}
+              </button>
+            ))}
           </div>
-          <h3 className="font-bold text-lg uppercase tracking-tight">{proj.title}</h3>
-          <p className="text-sm text-slate-500 font-mono">{proj.tags}</p>
-        </Link>
-      ))}
+        </div>
+        <div>
+          <h4 className="text-[10px] font-bold uppercase tracking-widest text-slate-400 mb-4 italic">Filter by Status</h4>
+          <div className="flex flex-col gap-2">
+            {statuses.map(stat => (
+              <button 
+                key={stat} 
+                onClick={() => setFilterStatus(stat)}
+                className={`text-left text-sm py-1 transition-all ${filterStatus === stat ? 'text-blue-600 font-bold translate-x-1' : 'text-slate-500 hover:text-slate-900'}`}
+              >
+                {stat}
+              </button>
+            ))}
+          </div>
+        </div>
+      </aside>
+
+      {/* Grid */}
+      <div className="flex-grow grid grid-cols-1 lg:grid-cols-2 gap-6">
+        {filteredProjects.map((proj) => (
+          <Link key={proj.id} to={`/works/${proj.id}`} className="block group">
+            <div className="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm hover:shadow-md transition-all hover:-translate-y-1">
+              <div className="flex justify-between items-start mb-6">
+                <div className="p-2.5 bg-slate-50 rounded-xl border border-slate-100">
+                  <Folder size={20} className="text-slate-600" />
+                </div>
+                <span className={`text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-wider flex items-center gap-1.5 
+                  ${proj.status === 'Active' ? 'bg-green-50 text-green-600' : 
+                    proj.status === 'Completed' ? 'bg-blue-50 text-blue-600' : 
+                    proj.status === 'Backlog' ? 'bg-orange-50 text-orange-600' : 'bg-slate-100 text-slate-500'}`}>
+                  <span className={`h-1.5 w-1.5 rounded-full ${proj.status === 'Active' ? 'bg-green-500 animate-pulse' : 'bg-current'}`}></span>
+                  {proj.status}
+                </span>
+              </div>
+
+              <h3 className="font-bold text-xl mb-2 group-hover:text-blue-600 transition-colors">{proj.title}</h3>
+              <p className="text-sm text-slate-500 mb-6 line-clamp-2">{proj.description}</p>
+
+              <div className="grid grid-cols-2 gap-4 mb-6 text-[11px] font-medium text-slate-400">
+                <div className="flex items-center gap-2">
+                   <Layout size={14} /> @{proj.category}
+                </div>
+                <div className="flex items-center gap-2">
+                   <Clock size={14} /> {proj.date}
+                </div>
+              </div>
+
+              <div className="space-y-3 pt-6 border-t border-slate-100">
+                <div className="flex justify-between items-center text-[10px] font-bold uppercase tracking-widest">
+                  <div className="flex items-center gap-2">
+                    <span className="text-orange-600 font-mono">{proj.progress}%</span>
+                    <span className="text-slate-200">|</span>
+                    <span className="text-slate-600">{proj.tasks} Tasks</span>
+                  </div>
+                  <span className="text-slate-400 italic font-mono">{proj.priority}</span>
+                </div>
+                <div className="h-2 w-full bg-slate-100 rounded-full overflow-hidden">
+                  <div 
+                    className={`h-full rounded-full transition-all duration-1000 ${proj.status === 'Completed' ? 'bg-blue-500' : 'bg-orange-500'}`} 
+                    style={{ width: `${proj.progress}%` }}
+                  ></div>
+                </div>
+              </div>
+            </div>
+          </Link>
+        ))}
+      </div>
+    </div>
+  );
+};
+
+const ProjectDetail = () => {
+  const { projectId } = useParams();
+  const navigate = useNavigate();
+  const project = ALL_PROJECTS.find(p => p.id === projectId);
+
+  if (!project) return <div className="pt-20 text-center font-mono uppercase text-slate-400">Project Not Found</div>;
+
+  return (
+    <section className="animate-in fade-in slide-in-from-bottom-4 duration-700">
+      <button onClick={() => navigate('/works')} className="text-xs font-mono uppercase tracking-widest text-blue-600 mb-8 flex items-center gap-2 hover:gap-4 transition-all">
+        ← Back to Works
+      </button>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-16">
+        <div>
+          <span className="text-[10px] font-bold uppercase tracking-[0.3em] text-blue-600 block mb-4 italic">{project.category}</span>
+          <h2 className="text-5xl font-bold tracking-tighter mb-4">{project.title}</h2>
+          <div className="h-1 w-20 bg-slate-900 mb-8"></div>
+          <p className="text-lg text-slate-700 leading-relaxed mb-8">{project.description}</p>
+          <div className="p-6 bg-slate-50 border border-slate-100 rounded-xl">
+             <h4 className="font-bold text-sm uppercase mb-3 flex items-center gap-2">
+               <CheckCircle2 size={16} className="text-blue-600" /> Technical Challenge
+             </h4>
+             <p className="text-sm text-slate-600 leading-relaxed">{project.challenge}</p>
+          </div>
+        </div>
+        <div className="aspect-video bg-slate-100 rounded-2xl border border-slate-200 flex items-center justify-center text-slate-400 font-mono">
+          [ {project.id.toUpperCase()}_CASE_STUDY_PREVIEW ]
+        </div>
+      </div>
     </section>
   );
 };
 
+// ... (About, Contact, Test components remain same as your previous App.jsx)
 const About = () => (
   <section className="grid grid-cols-1 md:grid-cols-2 gap-16 items-start animate-in fade-in duration-700">
     <div className="max-w-2xl">
@@ -77,39 +241,6 @@ const Contact = () => (
   </section>
 );
 
-const ProjectDetail = () => {
-  const { projectId } = useParams();
-  const navigate = useNavigate();
-
-  const projects = [
-    { id: 'system-01', title: "System Architecture 01", tags: "UX Design • Product Logic", description: "Optimization of data flow for enterprise systems.", challenge: "Reducing latency by 40%." },
-    { id: 'data-ui', title: "Data Visualization UI", tags: "React • Frontend Systems", description: "Analytical datasets into actionable insights.", challenge: "Managing 10,000 data points." },
-    { id: 'ecom-logic', title: "E-Commerce Logic", tags: "UX/UI • User Flow", description: "Redesigning checkout pipeline.", challenge: "Streamlining 5-step to 2-step flow." },
-    { id: 'api-dash', title: "API Dashboard", tags: "Systems Design • Tailwind", description: "Developer-first portal.", challenge: "Structuring documentation accessibility." }
-  ];
-
-  const project = projects.find(p => p.id === projectId);
-  if (!project) return <div className="pt-20 text-center font-mono uppercase text-slate-400">Project Not Found</div>;
-
-  return (
-    <section className="animate-in fade-in slide-in-from-bottom-4 duration-700">
-      <button onClick={() => navigate('/works')} className="text-xs font-mono uppercase tracking-widest text-blue-600 mb-8 flex items-center gap-2 hover:gap-4 transition-all">
-        ← Back to Works
-      </button>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-16">
-        <div>
-          <h2 className="text-5xl font-bold tracking-tighter mb-4">{project.title}</h2>
-          <p className="text-slate-500 font-mono mb-8">{project.tags}</p>
-          <p className="text-slate-700 leading-relaxed">{project.description}</p>
-        </div>
-        <div className="aspect-video bg-slate-100 rounded-sm border border-slate-200 flex items-center justify-center text-slate-400 font-mono">
-          [ {project.id.toUpperCase()}_MAIN_IMAGE ]
-        </div>
-      </div>
-    </section>
-  );
-};
-
 const Test = () => (
   <section className="animate-in fade-in slide-in-from-bottom-4 duration-700">
     <h2 className="text-5xl font-bold tracking-tighter mb-8 italic text-blue-600">System Test Page</h2>
@@ -117,13 +248,13 @@ const Test = () => (
       <p className="font-mono text-sm text-slate-500 uppercase tracking-widest mb-4">// Debug Console</p>
       <ul className="space-y-2 text-slate-700">
         <li>• Router Status: <span className="text-green-500 font-bold underline">Active (HashRouter)</span></li>
-        <li>• Responsiveness: <span className="text-green-500 font-bold underline">Verified</span></li>
+        <li>• Filtering Engine: <span className="text-green-500 font-bold underline">Operational</span></li>
       </ul>
     </div>
   </section>
 );
 
-// --- 2. MAIN APP ENTRY ---
+// --- 3. MAIN APP ENTRY ---
 
 export default function App() {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
@@ -190,7 +321,7 @@ export default function App() {
           </Routes>
         </main>
 
-        {/* --- PROFESSIONAL FOOTER --- */}
+        {/* --- FOOTER --- */}
         <footer className="px-8 md:px-16 py-12 border-t border-slate-100 bg-white mt-auto">
           <div className="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-start gap-12">
             <div className="space-y-4">
