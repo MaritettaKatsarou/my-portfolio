@@ -133,7 +133,7 @@ const Works = () => {
       <div className="flex-grow grid grid-cols-1 lg:grid-cols-2 gap-6">
         {filteredProjects.map((proj) => (
           <Link key={proj.id} to={`/works/${proj.id}`} className="block group">
-            <div className="bg-slate- border border-slate-100 rounded-2xl p-6 shadow-sm transition-all duration-500 ease-out hover:bg-white hover:shadow-xl hover:shadow-slate-200/50 hover:-translate-y-1">
+            <div className="bg-slate- border border-slate-100 rounded-2xl p-6 shadow-sm transition-all duration-500 ease-out hover:bg-white hover:shadow-xl hover:shadow-slate-200/100 hover:-translate-y-1">
               <div className="flex justify-between items-start mb-6">
                 {/* --- ICON BOX --- */}
                 <div className="p-2.5 bg-slate-50 rounded-xl border border-slate-100">
@@ -151,23 +151,18 @@ const Works = () => {
               <h3 className="font-bold text-xl mb-2 group-hover:text-blue-600 transition-colors">{proj.title}</h3>
               <p className="text-sm text-slate-500 mb-6 line-clamp-2">{proj.description}</p>
 
-              {/* Only the Progress/Tasks section remains below */}
-              <div className="space-y-3 pt-6 border-t border-slate-100">
-                <div className="flex justify-between items-center text-[10px] font-bold uppercase tracking-widest">
-                  <div className="flex items-center gap-2">
-                    <span className="text-orange-600 font-mono">{proj.progress}%</span>
-                    <span className="text-slate-200">|</span>
-                    <span className="text-slate-600">{proj.tasks} Tasks</span>
-                  </div>
-                  <span className="text-slate-400 italic font-mono">{proj.priority}</span>
+              {/* RESTORED: Metadata Grid (Category/Date) */}
+              <div className="grid grid-cols-2 gap-4 text-[11px] font-medium text-slate-400">
+                <div className="flex items-center gap-2">
+                  <Layout size={14} /> @{proj.category}
                 </div>
-                <div className="h-2 w-full bg-slate-100 rounded-full overflow-hidden">
-                  <div
-                    className={`h-full rounded-full transition-all duration-1000 ${proj.status === 'Completed' ? 'bg-blue-500' : 'bg-orange-500'}`}
-                    style={{ width: `${proj.progress}%` }}
-                  ></div>
+                <div className="flex items-center gap-2">
+                  <Clock size={14} /> {proj.date}
                 </div>
               </div>
+
+              {/* REMOVED: Progress Bar/Tasks/Priority section */}
+
             </div>
           </Link>
         ))}
