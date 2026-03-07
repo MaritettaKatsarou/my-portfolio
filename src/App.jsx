@@ -95,32 +95,35 @@ const Works = () => {
     <div className="flex flex-col md:flex-row gap-12 animate-in fade-in">
       {/* Sidebar Filters */}
       <aside className="w-full md:w-64 space-y-8">
-        {/* Main Title */}
         <div className="pb-2 border-b border-slate-100 mb-6">
           <h2 className="text-2xl font-bold tracking-tighter text-slate-900">Filters</h2>
         </div>
-        <div>
-          <h4 className="text-[10px] font-bold uppercase tracking-widest text-slate-400 mb-4 italic">Filter by Category</h4>
+        
+        {/* Category Filter */}
+        <div className="p-5 border border-slate-200 rounded-2xl bg-slate-50/50">
+          <h4 className="text-[10px] font-bold uppercase tracking-widest text-slate-400 mb-4 italic">Category</h4>
           <div className="flex flex-col gap-2">
             {categories.map(cat => (
               <button
                 key={cat}
                 onClick={() => setFilterCategory(cat)}
-                className={`text-left text-sm py-1 transition-all ${filterCategory === cat ? 'text-blue-600 font-bold translate-x-1' : 'text-slate-500 hover:text-slate-900'}`}
+                className={`text-left text-sm px-3 py-2 rounded-xl transition-all ${filterCategory === cat ? 'bg-blue-600 text-white shadow-md font-bold' : 'text-slate-500 hover:bg-white hover:text-slate-900'}`}
               >
                 {cat}
               </button>
             ))}
           </div>
         </div>
-        <div>
-          <h4 className="text-[10px] font-bold uppercase tracking-widest text-slate-400 mb-4 italic">Filter by Status</h4>
+
+        {/* Status Filter */}
+        <div className="p-5 border border-slate-200 rounded-2xl bg-slate-50/50">
+          <h4 className="text-[10px] font-bold uppercase tracking-widest text-slate-400 mb-4 italic">Status</h4>
           <div className="flex flex-col gap-2">
             {statuses.map(stat => (
               <button
                 key={stat}
                 onClick={() => setFilterStatus(stat)}
-                className={`text-left text-sm py-1 transition-all ${filterStatus === stat ? 'text-blue-600 font-bold translate-x-1' : 'text-slate-500 hover:text-slate-900'}`}
+                className={`text-left text-sm px-3 py-2 rounded-xl transition-all ${filterStatus === stat ? 'bg-blue-600 text-white shadow-md font-bold' : 'text-slate-500 hover:bg-white hover:text-slate-900'}`}
               >
                 {stat}
               </button>
@@ -133,48 +136,25 @@ const Works = () => {
       <div className="flex-grow grid grid-cols-1 lg:grid-cols-2 gap-6">
         {filteredProjects.map((proj) => (
           <Link key={proj.id} to={`/works/${proj.id}`} className="block group">
-            <div className="bg-slate- border border-slate-200 rounded-2xl p-6 shadow-sm transition-all duration-500 ease-out hover:bg-white hover:shadow-xl hover:shadow-slate-200/50 hover:-translate-y-1">
+            <div className="bg-slate-50 border border-slate-200 rounded-2xl p-6 shadow-sm transition-all duration-500 ease-out hover:bg-white hover:shadow-xl hover:shadow-slate-200/50 hover:-translate-y-2">
               <div className="flex justify-between items-start mb-6">
-                {/* --- ICON BOX --- */}
-                <div className="p-2.5 bg-slate-50 rounded-xl border border-slate-100">
+                <div className="p-2.5 bg-slate-50 rounded-xl border border-slate-100 group-hover:bg-white transition-colors">
                   {categoryIcons[proj.category] || categoryIcons["Default"]}
                 </div>
                 <span className={`text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-wider flex items-center gap-1.5 
-                  ${proj.status === 'Active' ? 'bg-green-50 text-green-600' :
-                    proj.status === 'Completed' ? 'bg-blue-50 text-blue-600' :
-                      proj.status === 'Backlog' ? 'bg-orange-50 text-orange-600' : 'bg-slate-100 text-slate-500'}`}>
+                  ${proj.status === 'Active' ? 'bg-green-50 text-green-600' : 
+                    proj.status === 'Completed' ? 'bg-blue-50 text-blue-600' : 
+                    proj.status === 'Backlog' ? 'bg-orange-50 text-orange-600' : 'bg-slate-100 text-slate-500'}`}>
                   <span className={`h-1.5 w-1.5 rounded-full ${proj.status === 'Active' ? 'bg-green-500 animate-pulse' : 'bg-current'}`}></span>
                   {proj.status}
                 </span>
               </div>
 
               <h3 className="font-bold text-xl mb-2 group-hover:text-blue-600 transition-colors">{proj.title}</h3>
-              <p className="text-sm text-slate-500 mb-6 line-clamp-2">{proj.description}</p>
-
-              <div className="grid grid-cols-2 gap-4 mb-6 text-[11px] font-medium text-slate-400">
-                <div className="flex items-center gap-2">
-                  <Layout size={14} /> @{proj.category}
-                </div>
-                <div className="flex items-center gap-2">
-                  <Clock size={14} /> {proj.date}
-                </div>
-              </div>
-
-              <div className="space-y-3 pt-6 border-t border-slate-100">
-                <div className="flex justify-between items-center text-[10px] font-bold uppercase tracking-widest">
-                  <div className="flex items-center gap-2">
-                    <span className="text-orange-600 font-mono">{proj.progress}%</span>
-                    <span className="text-slate-200">|</span>
-                    <span className="text-slate-600">{proj.tasks} Tasks</span>
-                  </div>
-                  <span className="text-slate-400 italic font-mono">{proj.priority}</span>
-                </div>
-                <div className="h-2 w-full bg-slate-100 rounded-full overflow-hidden">
-                  <div
-                    className={`h-full rounded-full transition-all duration-1000 ${proj.status === 'Completed' ? 'bg-blue-500' : 'bg-orange-500'}`}
-                    style={{ width: `${proj.progress}%` }}
-                  ></div>
-                </div>
+              <p className="text-sm text-slate-500 line-clamp-2">{proj.description}</p>
+              
+              <div className="mt-6 pt-6 border-t border-slate-100 flex items-center text-[10px] font-bold uppercase tracking-widest text-blue-600 opacity-0 group-hover:opacity-100 transition-all translate-y-2 group-hover:translate-y-0">
+                View Project Details →
               </div>
             </div>
           </Link>
@@ -192,25 +172,81 @@ const ProjectDetail = () => {
   if (!project) return <div className="pt-20 text-center font-mono uppercase text-slate-400">Project Not Found</div>;
 
   return (
-    <section className="animate-in fade-in slide-in-from-bottom-4 duration-700">
-      <button onClick={() => navigate('/works')} className="text-xs font-mono uppercase tracking-widest text-blue-600 mb-8 flex items-center gap-2 hover:gap-4 transition-all">
+    <section className="animate-in fade-in slide-in-from-bottom-4 duration-700 max-w-5xl mx-auto">
+      {/* Back Button */}
+      <button onClick={() => navigate('/works')} className="text-xs font-mono uppercase tracking-widest text-blue-600 mb-12 flex items-center gap-2 hover:gap-4 transition-all">
         ← Back to Works
       </button>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-16">
-        <div>
-          <span className="text-[10px] font-bold uppercase tracking-[0.3em] text-blue-600 block mb-4 italic">{project.category}</span>
-          <h2 className="text-5xl font-bold tracking-tighter mb-4">{project.title}</h2>
-          <div className="h-1 w-20 bg-slate-900 mb-8"></div>
-          <p className="text-lg text-slate-700 leading-relaxed mb-8">{project.description}</p>
-          <div className="p-6 bg-slate-50 border border-slate-100 rounded-xl">
-            <h4 className="font-bold text-sm uppercase mb-3 flex items-center gap-2">
-              <CheckCircle2 size={16} className="text-blue-600" /> Technical Challenge
-            </h4>
-            <p className="text-sm text-slate-600 leading-relaxed">{project.challenge}</p>
+
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-16">
+        {/* LEFT COLUMN: The Narrative */}
+        <div className="lg:col-span-7">
+          <div className="flex items-center gap-3 mb-6">
+             <span className="text-[10px] font-bold uppercase tracking-[0.3em] text-blue-600 italic">{project.category}</span>
+             <span className="h-px w-8 bg-slate-200"></span>
+             <span className="text-[10px] font-mono text-slate-400 uppercase">{project.date}</span>
+          </div>
+          
+          <h2 className="text-5xl font-bold tracking-tighter mb-8">{project.title}</h2>
+          <p className="text-xl text-slate-600 leading-relaxed mb-10">{project.description}</p>
+          
+          <div className="space-y-6">
+            <h4 className="font-bold text-sm uppercase tracking-widest border-b border-slate-100 pb-2">The Challenge</h4>
+            <p className="text-slate-700 leading-relaxed">{project.challenge}</p>
           </div>
         </div>
-        <div className="aspect-video bg-slate-100 rounded-2xl border border-slate-200 flex items-center justify-center text-slate-400 font-mono">
-          [ {project.id.toUpperCase()}_CASE_STUDY_PREVIEW ]
+
+        {/* RIGHT COLUMN: The "System Status" Dashboard */}
+        <div className="lg:col-span-5">
+          <div className="bg-slate-50 border border-slate-200 rounded-3xl p-8 sticky top-32">
+            <div className="flex justify-between items-center mb-8">
+              <h3 className="font-bold text-xs uppercase tracking-widest text-slate-900">Project Status</h3>
+              <span className={`text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-wider 
+                ${project.status === 'Active' ? 'bg-green-100 text-green-700' : 'bg-blue-100 text-blue-700'}`}>
+                {project.status}
+              </span>
+            </div>
+
+            {/* THE METADATA BLOCK FROM THE CARDS */}
+            <div className="space-y-8">
+              {/* Progress Bar Group */}
+              <div className="space-y-4">
+                <div className="flex justify-between items-end">
+                  <div className="space-y-1">
+                    <span className="block text-[10px] font-bold text-slate-400 uppercase tracking-widest">Completion</span>
+                    <span className="text-3xl font-bold text-orange-600 font-mono">{project.progress}%</span>
+                  </div>
+                  <div className="text-right space-y-1">
+                    <span className="block text-[10px] font-bold text-slate-400 uppercase tracking-widest">Priority</span>
+                    <span className="text-sm font-bold uppercase italic text-slate-900">{project.priority}</span>
+                  </div>
+                </div>
+                
+                <div className="h-3 w-full bg-slate-200 rounded-full overflow-hidden">
+                  <div 
+                    className="h-full bg-orange-500 rounded-full transition-all duration-1000" 
+                    style={{ width: `${project.progress}%` }}
+                  ></div>
+                </div>
+              </div>
+
+              {/* Task Counter Group */}
+              <div className="flex items-center gap-4 p-4 bg-white border border-slate-100 rounded-2xl shadow-sm">
+                <div className="p-2 bg-slate-50 rounded-lg">
+                   <CheckCircle2 size={20} className="text-blue-600" />
+                </div>
+                <div>
+                  <span className="block text-[10px] font-bold text-slate-400 uppercase tracking-widest">Deliverables</span>
+                  <span className="text-lg font-bold text-slate-900">{project.tasks} Tasks</span>
+                </div>
+              </div>
+
+              {/* Action Button */}
+              <button className="w-full py-4 bg-slate-900 text-white rounded-2xl font-bold text-xs uppercase tracking-[0.2em] hover:bg-blue-600 transition-colors">
+                View Documentation
+              </button>
+            </div>
+          </div>
         </div>
       </div>
     </section>
