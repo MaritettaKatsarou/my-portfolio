@@ -93,49 +93,57 @@ const Works = () => {
 
   return (
     <div className="flex flex-col md:flex-row gap-12 animate-in fade-in">
-      {/* Sidebar Filters */}
+      {/* --- RESPONSIVE SIDEBAR FILTERS --- */}
       <aside className="w-full md:w-64 space-y-8">
-        {/* Main Title */}
-        <div className="pb-2 border-b border-slate-100 mb-6">
+        <div className="pb-2 border-b border-slate-100">
           <h2 className="text-2xl font-bold tracking-tighter text-slate-900">Filters</h2>
         </div>
-        <div>
-          <h4 className="text-[10px] font-bold uppercase tracking-widest text-slate-400 mb-4 italic">Filter by Category</h4>
-          <div className="flex flex-col gap-2">
-            {categories.map(cat => (
-              <button
-                key={cat}
-                onClick={() => setFilterCategory(cat)}
-                className={`text-left text-sm py-1 transition-all ${filterCategory === cat ? 'text-blue-600 font-bold translate-x-1' : 'text-slate-500 hover:text-slate-900'}`}
-              >
-                {cat}
-              </button>
-            ))}
+
+        {/* Using flex-row flex-wrap on mobile, flex-col on desktop */}
+        <div className="flex flex-row flex-wrap md:flex-col gap-8">
+          
+          {/* Category Group */}
+          <div className="flex-1 min-w-[140px]">
+            <h4 className="text-[10px] font-bold uppercase tracking-widest text-slate-400 mb-4 italic">Category</h4>
+            <div className="flex flex-col gap-2">
+              {categories.map(cat => (
+                <button
+                  key={cat}
+                  onClick={() => setFilterCategory(cat)}
+                  className={`text-left text-sm py-1 transition-all ${filterCategory === cat ? 'text-blue-600 font-bold translate-x-1' : 'text-slate-500 hover:text-slate-900'}`}
+                >
+                  {cat}
+                </button>
+              ))}
+            </div>
           </div>
-        </div>
-        <div>
-          <h4 className="text-[10px] font-bold uppercase tracking-widest text-slate-400 mb-4 italic">Filter by Status</h4>
-          <div className="flex flex-col gap-2">
-            {statuses.map(stat => (
-              <button
-                key={stat}
-                onClick={() => setFilterStatus(stat)}
-                className={`text-left text-sm py-1 transition-all ${filterStatus === stat ? 'text-blue-600 font-bold translate-x-1' : 'text-slate-500 hover:text-slate-900'}`}
-              >
-                {stat}
-              </button>
-            ))}
+
+          {/* Status Group */}
+          <div className="flex-1 min-w-[140px]">
+            <h4 className="text-[10px] font-bold uppercase tracking-widest text-slate-400 mb-4 italic">Status</h4>
+            <div className="flex flex-col gap-2">
+              {statuses.map(stat => (
+                <button
+                  key={stat}
+                  onClick={() => setFilterStatus(stat)}
+                  className={`text-left text-sm py-1 transition-all ${filterStatus === stat ? 'text-blue-600 font-bold translate-x-1' : 'text-slate-500 hover:text-slate-900'}`}
+                >
+                  {stat}
+                </button>
+              ))}
+            </div>
           </div>
+          
         </div>
       </aside>
 
-      {/* Grid */}
+      {/* --- GRID --- */}
       <div className="flex-grow grid grid-cols-1 lg:grid-cols-2 gap-6">
         {filteredProjects.map((proj) => (
           <Link key={proj.id} to={`/works/${proj.id}`} className="block group">
-           <div className="bg-slate-25 border border-slate-100 rounded-2xl p-6 shadow-sm transition-all duration-500 ease-out hover:bg-white hover:border-slate-200 hover:shadow-lg hover:shadow-slate-200/50 hover:-translate-y-1">
+            {/* Fixed bg-slate-25 to bg-slate-50 for consistency */}
+            <div className="bg-neutral-50 border border-slate-100 rounded-2xl p-6 shadow-sm transition-all duration-500 ease-out hover:bg-white hover:border-slate-200 hover:shadow-lg hover:shadow-slate-200/50 hover:-translate-y-1">
               <div className="flex justify-between items-start mb-6">
-                {/* --- ICON BOX --- */}
                 <div className="p-2.5 bg-slate-50 rounded-xl border border-slate-100">
                   {categoryIcons[proj.category] || categoryIcons["Default"]}
                 </div>
@@ -151,10 +159,8 @@ const Works = () => {
               <h3 className="font-bold text-xl mb-2 group-hover:text-blue-600 transition-colors">{proj.title}</h3>
               <p className="text-sm text-slate-500 mb-6 line-clamp-2">{proj.description}</p>
 
-              {/* RESTORED: Metadata Grid (Category/Date) with Dynamic Icons */}
               <div className="grid grid-cols-2 gap-4 text-[12px] font-medium text-slate-400">
                 <div className="flex items-center gap-2">
-                  {/* This pulls the specific icon (Cpu, Search, etc.) and scales it to size 14 */}
                   {React.cloneElement(categoryIcons[proj.category] || categoryIcons["Default"], { size: 14, className: "text-slate-400" })}
                   {proj.category}
                 </div>
@@ -162,7 +168,6 @@ const Works = () => {
                   <Clock size={14} /> {proj.date}
                 </div>
               </div>
-
             </div>
           </Link>
         ))}
