@@ -5,11 +5,11 @@ import { Menu, X, Folder, Clock, CheckCircle2, Layout } from 'lucide-react';
 // --- 1. DATA ARCHITECTURE ---
 // Moving data to a constant so it's accessible by all components
 const ALL_PROJECTS = [
-  { 
-    id: 'fintech-app', 
-    title: "Fintech Mobile App Redesign", 
-    category: "Product Design", 
-    status: "Active", 
+  {
+    id: 'fintech-app',
+    title: "Fintech Mobile App Redesign",
+    category: "Product Design",
+    status: "Active",
     date: "Nov 6, 2025",
     priority: "High",
     progress: 72,
@@ -17,11 +17,11 @@ const ALL_PROJECTS = [
     description: "Improve onboarding conversion and simplify complex banking flows for Gen-Z users.",
     challenge: "Balancing banking security requirements with a 'frictionless' user experience."
   },
-  { 
-    id: 'ai-platform', 
-    title: "AI Learning Platform", 
-    category: "EdTech", 
-    status: "Planned", 
+  {
+    id: 'ai-platform',
+    title: "AI Learning Platform",
+    category: "EdTech",
+    status: "Planned",
     date: "Nov 14, 2025",
     priority: "Medium",
     progress: 54,
@@ -29,11 +29,11 @@ const ALL_PROJECTS = [
     description: "A redesign of the learning experience to support AI-driven curriculum personalization.",
     challenge: "Designing a UI that explains AI decisions without overwhelming the student."
   },
-  { 
-    id: 'ecom-audit', 
-    title: "E-commerce Admin Audit", 
-    category: "UX Audit", 
-    status: "Backlog", 
+  {
+    id: 'ecom-audit',
+    title: "E-commerce Admin Audit",
+    category: "UX Audit",
+    status: "Backlog",
     date: "Nov 6, 2025",
     priority: "Medium",
     progress: 65,
@@ -41,11 +41,11 @@ const ALL_PROJECTS = [
     description: "Audit usability issues and propose UX improvements for retail management systems.",
     challenge: "Identifying bottlenecks in the inventory management workflow."
   },
-  { 
-    id: 'internal-pm', 
-    title: "Internal PM System", 
-    category: "Systems", 
-    status: "Completed", 
+  {
+    id: 'internal-pm',
+    title: "Internal PM System",
+    category: "Systems",
+    status: "Completed",
     date: "Nov 6, 2025",
     priority: "Low",
     progress: 100,
@@ -86,29 +86,43 @@ const Works = () => {
   return (
     <div className="flex flex-col md:flex-row gap-12 animate-in fade-in">
       {/* Sidebar Filters */}
-      <aside className="w-full md:w-64 space-y-8">
-        <div>
-          <h4 className="text-[10px] font-bold uppercase tracking-widest text-slate-400 mb-4 italic">Filter by Category</h4>
-          <div className="flex flex-col gap-2">
+      <aside className="w-full md:w-64 space-y-6">
+        {/* Main Title */}
+        <div className="pb-2 border-b border-slate-100 mb-6">
+          <h2 className="text-2xl font-bold tracking-tighter text-slate-900">Filters</h2>
+        </div>
+
+        {/* Category Filter Group */}
+        <div className="p-5 border border-slate-200 rounded-2xl bg-slate-50/50">
+          <h4 className="text-[10px] font-bold uppercase tracking-[0.2em] text-slate-400 mb-4 italic">Category</h4>
+          <div className="flex flex-col gap-1.5">
             {categories.map(cat => (
-              <button 
-                key={cat} 
+              <button
+                key={cat}
                 onClick={() => setFilterCategory(cat)}
-                className={`text-left text-sm py-1 transition-all ${filterCategory === cat ? 'text-blue-600 font-bold translate-x-1' : 'text-slate-500 hover:text-slate-900'}`}
+                className={`text-left text-sm px-3 py-2 rounded-xl transition-all ${filterCategory === cat
+                    ? 'bg-blue-600 text-white shadow-md shadow-blue-200 font-bold'
+                    : 'text-slate-500 hover:bg-white hover:text-slate-900'
+                  }`}
               >
                 {cat}
               </button>
             ))}
           </div>
         </div>
-        <div>
-          <h4 className="text-[10px] font-bold uppercase tracking-widest text-slate-400 mb-4 italic">Filter by Status</h4>
-          <div className="flex flex-col gap-2">
+
+        {/* Status Filter Group */}
+        <div className="p-5 border border-slate-200 rounded-2xl bg-slate-50/50">
+          <h4 className="text-[10px] font-bold uppercase tracking-[0.2em] text-slate-400 mb-4 italic">Status</h4>
+          <div className="flex flex-col gap-1.5">
             {statuses.map(stat => (
-              <button 
-                key={stat} 
+              <button
+                key={stat}
                 onClick={() => setFilterStatus(stat)}
-                className={`text-left text-sm py-1 transition-all ${filterStatus === stat ? 'text-blue-600 font-bold translate-x-1' : 'text-slate-500 hover:text-slate-900'}`}
+                className={`text-left text-sm px-3 py-2 rounded-xl transition-all ${filterStatus === stat
+                    ? 'bg-blue-600 text-white shadow-md shadow-blue-200 font-bold'
+                    : 'text-slate-500 hover:bg-white hover:text-slate-900'
+                  }`}
               >
                 {stat}
               </button>
@@ -121,15 +135,15 @@ const Works = () => {
       <div className="flex-grow grid grid-cols-1 lg:grid-cols-2 gap-6">
         {filteredProjects.map((proj) => (
           <Link key={proj.id} to={`/works/${proj.id}`} className="block group">
-              <div className="bg-slate-25 border border-slate-200 rounded-2xl p-6 shadow-sm transition-all duration-500 ease-out hover:bg-white hover:shadow-xl hover:shadow-slate-200/50 hover:-translate-y-1"> 
+            <div className="bg-slate-25 border border-slate-200 rounded-2xl p-6 shadow-sm transition-all duration-500 ease-out hover:bg-white hover:shadow-xl hover:shadow-slate-200/50 hover:-translate-y-1">
               <div className="flex justify-between items-start mb-6">
                 <div className="p-2.5 bg-slate-50 rounded-xl border border-slate-100">
                   <Folder size={20} className="text-slate-600" />
                 </div>
                 <span className={`text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-wider flex items-center gap-1.5 
-                  ${proj.status === 'Active' ? 'bg-green-50 text-green-600' : 
-                    proj.status === 'Completed' ? 'bg-blue-50 text-blue-600' : 
-                    proj.status === 'Backlog' ? 'bg-orange-50 text-orange-600' : 'bg-slate-100 text-slate-500'}`}>
+                  ${proj.status === 'Active' ? 'bg-green-50 text-green-600' :
+                    proj.status === 'Completed' ? 'bg-blue-50 text-blue-600' :
+                      proj.status === 'Backlog' ? 'bg-orange-50 text-orange-600' : 'bg-slate-100 text-slate-500'}`}>
                   <span className={`h-1.5 w-1.5 rounded-full ${proj.status === 'Active' ? 'bg-green-500 animate-pulse' : 'bg-current'}`}></span>
                   {proj.status}
                 </span>
@@ -140,10 +154,10 @@ const Works = () => {
 
               <div className="grid grid-cols-2 gap-4 mb-6 text-[11px] font-medium text-slate-400">
                 <div className="flex items-center gap-2">
-                   <Layout size={14} /> @{proj.category}
+                  <Layout size={14} /> @{proj.category}
                 </div>
                 <div className="flex items-center gap-2">
-                   <Clock size={14} /> {proj.date}
+                  <Clock size={14} /> {proj.date}
                 </div>
               </div>
 
@@ -157,8 +171,8 @@ const Works = () => {
                   <span className="text-slate-400 italic font-mono">{proj.priority}</span>
                 </div>
                 <div className="h-2 w-full bg-slate-100 rounded-full overflow-hidden">
-                  <div 
-                    className={`h-full rounded-full transition-all duration-1000 ${proj.status === 'Completed' ? 'bg-blue-500' : 'bg-orange-500'}`} 
+                  <div
+                    className={`h-full rounded-full transition-all duration-1000 ${proj.status === 'Completed' ? 'bg-blue-500' : 'bg-orange-500'}`}
                     style={{ width: `${proj.progress}%` }}
                   ></div>
                 </div>
@@ -190,10 +204,10 @@ const ProjectDetail = () => {
           <div className="h-1 w-20 bg-slate-900 mb-8"></div>
           <p className="text-lg text-slate-700 leading-relaxed mb-8">{project.description}</p>
           <div className="p-6 bg-slate-50 border border-slate-100 rounded-xl">
-             <h4 className="font-bold text-sm uppercase mb-3 flex items-center gap-2">
-               <CheckCircle2 size={16} className="text-blue-600" /> Technical Challenge
-             </h4>
-             <p className="text-sm text-slate-600 leading-relaxed">{project.challenge}</p>
+            <h4 className="font-bold text-sm uppercase mb-3 flex items-center gap-2">
+              <CheckCircle2 size={16} className="text-blue-600" /> Technical Challenge
+            </h4>
+            <p className="text-sm text-slate-600 leading-relaxed">{project.challenge}</p>
           </div>
         </div>
         <div className="aspect-video bg-slate-100 rounded-2xl border border-slate-200 flex items-center justify-center text-slate-400 font-mono">
