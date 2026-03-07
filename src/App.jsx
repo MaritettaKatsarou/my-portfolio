@@ -217,7 +217,7 @@ const ProjectDetail = () => {
         <div className="lg:col-span-4">
           <div className="sticky top-32 px-4 py-2 border-l-2 border-slate-100">
             <div className="flex justify-between items-center mb-12">
-              <h3 className="font-mono font-semibold text-[12px] uppercase tracking-[0.35em] text-slate-400">
+              <h3 className="font-mono font-semibold text-[12px] uppercase tracking-[0.25em] text-slate-400">
                 Project Status
               </h3>
               <span className={`text-[12px] font-bold px-2 py-0.5 rounded-sm uppercase tracking-wider 
@@ -247,7 +247,7 @@ const ProjectDetail = () => {
               {/* Priority Metric */}
               <div className="space-y-3">
                 <span className="block text-[12px] font-mono text-slate-400 uppercase tracking-widest">02 Priority</span>
-                <span className="block text-xl font-medium text-slate-900 italic uppercase tracking-tight">
+                <span className="block text-xl font-medium text-slate-900 tracking-normal">
                   {project.priority}
                 </span>
               </div>
