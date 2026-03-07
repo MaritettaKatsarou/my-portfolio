@@ -95,35 +95,32 @@ const Works = () => {
     <div className="flex flex-col md:flex-row gap-12 animate-in fade-in">
       {/* Sidebar Filters */}
       <aside className="w-full md:w-64 space-y-8">
+        {/* Main Title */}
         <div className="pb-2 border-b border-slate-100 mb-6">
           <h2 className="text-2xl font-bold tracking-tighter text-slate-900">Filters</h2>
         </div>
-        
-        {/* Category Filter */}
-        <div className="p-5 border border-slate-200 rounded-2xl bg-slate-50/50">
-          <h4 className="text-[10px] font-bold uppercase tracking-widest text-slate-400 mb-4 italic">Category</h4>
+        <div>
+          <h4 className="text-[10px] font-bold uppercase tracking-widest text-slate-400 mb-4 italic">Filter by Category</h4>
           <div className="flex flex-col gap-2">
             {categories.map(cat => (
               <button
                 key={cat}
                 onClick={() => setFilterCategory(cat)}
-                className={`text-left text-sm px-3 py-2 rounded-xl transition-all ${filterCategory === cat ? 'bg-blue-600 text-white shadow-md font-bold' : 'text-slate-500 hover:bg-white hover:text-slate-900'}`}
+                className={`text-left text-sm py-1 transition-all ${filterCategory === cat ? 'text-blue-600 font-bold translate-x-1' : 'text-slate-500 hover:text-slate-900'}`}
               >
                 {cat}
               </button>
             ))}
           </div>
         </div>
-
-        {/* Status Filter */}
-        <div className="p-5 border border-slate-200 rounded-2xl bg-slate-50/50">
-          <h4 className="text-[10px] font-bold uppercase tracking-widest text-slate-400 mb-4 italic">Status</h4>
+        <div>
+          <h4 className="text-[10px] font-bold uppercase tracking-widest text-slate-400 mb-4 italic">Filter by Status</h4>
           <div className="flex flex-col gap-2">
             {statuses.map(stat => (
               <button
                 key={stat}
                 onClick={() => setFilterStatus(stat)}
-                className={`text-left text-sm px-3 py-2 rounded-xl transition-all ${filterStatus === stat ? 'bg-blue-600 text-white shadow-md font-bold' : 'text-slate-500 hover:bg-white hover:text-slate-900'}`}
+                className={`text-left text-sm py-1 transition-all ${filterStatus === stat ? 'text-blue-600 font-bold translate-x-1' : 'text-slate-500 hover:text-slate-900'}`}
               >
                 {stat}
               </button>
@@ -136,15 +133,16 @@ const Works = () => {
       <div className="flex-grow grid grid-cols-1 lg:grid-cols-2 gap-6">
         {filteredProjects.map((proj) => (
           <Link key={proj.id} to={`/works/${proj.id}`} className="block group">
-            <div className="bg-slate-50 border border-slate-200 rounded-2xl p-6 shadow-sm transition-all duration-500 ease-out hover:bg-white hover:shadow-xl hover:shadow-slate-200/50 hover:-translate-y-2">
+            <div className="bg-slate- border border-slate-100 rounded-2xl p-6 shadow-sm transition-all duration-500 ease-out hover:bg-white hover:shadow-xl hover:shadow-slate-200/50 hover:-translate-y-1">
               <div className="flex justify-between items-start mb-6">
-                <div className="p-2.5 bg-slate-50 rounded-xl border border-slate-100 group-hover:bg-white transition-colors">
+                {/* --- ICON BOX --- */}
+                <div className="p-2.5 bg-slate-50 rounded-xl border border-slate-100">
                   {categoryIcons[proj.category] || categoryIcons["Default"]}
                 </div>
                 <span className={`text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-wider flex items-center gap-1.5 
-                  ${proj.status === 'Active' ? 'bg-green-50 text-green-600' : 
-                    proj.status === 'Completed' ? 'bg-blue-50 text-blue-600' : 
-                    proj.status === 'Backlog' ? 'bg-orange-50 text-orange-600' : 'bg-slate-100 text-slate-500'}`}>
+                  ${proj.status === 'Active' ? 'bg-green-50 text-green-600' :
+                    proj.status === 'Completed' ? 'bg-blue-50 text-blue-600' :
+                      proj.status === 'Backlog' ? 'bg-orange-50 text-orange-600' : 'bg-slate-100 text-slate-500'}`}>
                   <span className={`h-1.5 w-1.5 rounded-full ${proj.status === 'Active' ? 'bg-green-500 animate-pulse' : 'bg-current'}`}></span>
                   {proj.status}
                 </span>
@@ -153,9 +151,9 @@ const Works = () => {
               <h3 className="font-bold text-xl mb-2 group-hover:text-blue-600 transition-colors">{proj.title}</h3>
               <p className="text-sm text-slate-500 line-clamp-2">{proj.description}</p>
               
-              <div className="mt-6 pt-6 border-t border-slate-100 flex items-center text-[10px] font-bold uppercase tracking-widest text-blue-600 opacity-0 group-hover:opacity-100 transition-all translate-y-2 group-hover:translate-y-0">
-                View Project Details →
-              </div>
+              {/* Removed: Metadata Grid (Category/Date) */}
+              {/* Removed: Progress Bar/Tasks/Priority section */}
+
             </div>
           </Link>
         ))}
