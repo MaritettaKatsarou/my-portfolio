@@ -152,11 +152,11 @@ const Works = () => {
               <p className="text-sm text-slate-500 mb-6 line-clamp-2">{proj.description}</p>
 
               {/* RESTORED: Metadata Grid (Category/Date) with Dynamic Icons */}
-              <div className="grid grid-cols-2 gap-4 text-[11px] font-medium text-slate-400">
+              <div className="grid grid-cols-2 gap-4 text-[12px] font-medium text-slate-400">
                 <div className="flex items-center gap-2">
                   {/* This pulls the specific icon (Cpu, Search, etc.) and scales it to size 14 */}
                   {React.cloneElement(categoryIcons[proj.category] || categoryIcons["Default"], { size: 14, className: "text-slate-400" })}
-                  @{proj.category}
+                  {proj.category}
                 </div>
                 <div className="flex items-center gap-2">
                   <Clock size={14} /> {proj.date}
