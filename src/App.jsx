@@ -71,10 +71,10 @@ const Home = () => (
 );
 
 const categoryIcons = {
-  "Product Design": <Layout size={20} className="text-blue-600" />,
-  "EdTech": <BookOpen size={20} className="text-purple-600" />,
-  "UX Audit": <Search size={20} className="text-orange-600" />,
-  "Systems": <Cpu size={20} className="text-green-600" />,
+  "Product Design": <Layout size={20} className="text-slate-600" />,
+  "EdTech": <BookOpen size={20} className="text-slate-600" />,
+  "UX Audit": <Search size={20} className="text-slate-600" />,
+  "Systems": <Cpu size={20} className="text-slate-600" />,
   "Default": <Folder size={20} className="text-slate-600" />
 };
 
