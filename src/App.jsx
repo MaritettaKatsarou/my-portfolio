@@ -101,7 +101,7 @@ const Works = () => {
 
         {/* Using flex-row flex-wrap on mobile, flex-col on desktop */}
         <div className="flex flex-row flex-wrap md:flex-col gap-8">
-          
+
           {/* Category Group */}
           <div className="flex-1 min-w-[140px]">
             <h4 className="text-[10px] font-bold uppercase tracking-widest text-slate-400 mb-4 italic">Category</h4>
@@ -133,7 +133,7 @@ const Works = () => {
               ))}
             </div>
           </div>
-          
+
         </div>
       </aside>
 
@@ -220,43 +220,61 @@ const ProjectDetail = () => {
             </div>
 
             {/* THE METADATA BLOCK FROM THE CARDS */}
-            <div className="space-y-8">
-              {/* Progress Bar Group */}
-              <div className="space-y-4">
-                <div className="flex justify-between items-end">
-                  <div className="space-y-1">
-                    <span className="block text-[10px] font-bold text-slate-400 uppercase tracking-widest">Completion</span>
-                    <span className="text-3xl font-bold text-orange-600 font-mono">{project.progress}%</span>
-                  </div>
-                  <div className="text-right space-y-1">
-                    <span className="block text-[10px] font-bold text-slate-400 uppercase tracking-widest">Priority</span>
-                    <span className="text-sm font-bold uppercase italic text-slate-900">{project.priority}</span>
-                  </div>
+            {/* --- REDESIGNED SYSTEM STATUS (Side Column) --- */}
+            <div className="lg:col-span-5">
+              <div className="sticky top-32 px-4 py-2 border-l-2 border-slate-100">
+                <div className="flex justify-between items-center mb-12">
+                  <h3 className="font-mono text-[10px] uppercase tracking-[0.3em] text-slate-400">System_Status</h3>
+                  <span className={`text-[10px] font-bold px-2 py-0.5 rounded-sm uppercase tracking-wider 
+        ${project.status === 'Active' ? 'bg-green-50 text-green-600' : 'bg-blue-50 text-blue-600'}`}>
+                    {project.status}
+                  </span>
                 </div>
 
-                <div className="h-3 w-full bg-slate-200 rounded-full overflow-hidden">
-                  <div
-                    className="h-full bg-orange-500 rounded-full transition-all duration-1000"
-                    style={{ width: `${project.progress}%` }}
-                  ></div>
+                {/* METADATA GRID */}
+                <div className="grid grid-cols-2 gap-y-12 gap-x-8">
+
+                  {/* Completion Metric */}
+                  <div className="space-y-3">
+                    <span className="block text-[10px] font-mono text-slate-400 uppercase tracking-widest">01_Completion</span>
+                    <div className="flex items-baseline gap-2">
+                      <span className="text-4xl font-light tracking-tighter text-slate-900">{project.progress}%</span>
+                    </div>
+                    <div className="h-1 w-full bg-slate-100 overflow-hidden">
+                      <div
+                        className="h-full bg-blue-600 transition-all duration-1000"
+                        style={{ width: `${project.progress}%` }}
+                      />
+                    </div>
+                  </div>
+
+                  {/* Priority Metric */}
+                  <div className="space-y-3">
+                    <span className="block text-[10px] font-mono text-slate-400 uppercase tracking-widest">02_Priority</span>
+                    <span className="block text-xl font-medium text-slate-900 italic uppercase tracking-tight">
+                      {project.priority}
+                    </span>
+                  </div>
+
+                  {/* Tasks Metric */}
+                  <div className="space-y-3 col-span-2 pt-6 border-t border-slate-50">
+                    <span className="block text-[10px] font-mono text-slate-400 uppercase tracking-widest">03_Deliverables</span>
+                    <div className="flex items-center gap-3">
+                      <CheckCircle2 size={18} className="text-blue-600" />
+                      <span className="text-xl font-medium text-slate-900">{project.tasks} <span className="text-slate-400 font-light">Total Units</span></span>
+                    </div>
+                  </div>
+
+                </div>
+
+                {/* Footer Detail */}
+                <div className="mt-16 pt-8 border-t border-slate-100">
+                  <p className="text-[10px] font-mono text-slate-300 uppercase leading-relaxed">
+        // Data integrity verified <br />
+        // Last system update: {project.date}
+                  </p>
                 </div>
               </div>
-
-              {/* Task Counter Group */}
-              <div className="flex items-center gap-4 p-4 bg-white border border-slate-100 rounded-2xl shadow-sm">
-                <div className="p-2 bg-slate-50 rounded-lg">
-                  <CheckCircle2 size={20} className="text-blue-600" />
-                </div>
-                <div>
-                  <span className="block text-[10px] font-bold text-slate-400 uppercase tracking-widest">Deliverables</span>
-                  <span className="text-lg font-bold text-slate-900">{project.tasks} Tasks</span>
-                </div>
-              </div>
-
-              {/* Action Button */}
-              <button className="w-full py-4 bg-slate-900 text-white rounded-2xl font-bold text-xs uppercase tracking-[0.2em] hover:bg-blue-600 transition-colors">
-                View Documentation
-              </button>
             </div>
           </div>
         </div>
@@ -336,7 +354,7 @@ export default function App() {
       <div className="min-h-screen bg-white text-slate-900 selection:bg-blue-100 flex flex-col">
 
         {/* --- NAVIGATION BAR --- */}
-       <nav className="fixed top-0 w-full h-20 flex items-center justify-between px-8 md:px-16 bg-white/60 backdrop-blur-lg z-50 shadow-sm shadow-slate-100/50">
+        <nav className="fixed top-0 w-full h-20 flex items-center justify-between px-8 md:px-16 bg-white/60 backdrop-blur-lg z-50 shadow-sm shadow-slate-100/50">
           <Link to="/" onClick={closeMenu} className="font-bold tracking-tighter text-xl">My-portfolio</Link>
 
           {/* Desktop Menu */}
