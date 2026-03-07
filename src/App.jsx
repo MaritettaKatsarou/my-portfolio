@@ -133,7 +133,7 @@ const Works = () => {
       <div className="flex-grow grid grid-cols-1 lg:grid-cols-2 gap-6">
         {filteredProjects.map((proj) => (
           <Link key={proj.id} to={`/works/${proj.id}`} className="block group">
-            <div className="bg-slate- border border-slate-100 rounded-2xl p-6 shadow-sm transition-all duration-500 ease-out hover:bg-white hover:shadow-xl hover:shadow-slate-200/100 hover:-translate-y-1">
+            <div className="bg-slate- border border-slate-100 rounded-2xl p-6 shadow-sm transition-all duration-500 ease-out hover:bg-white hover:shadow-lg hover:shadow-slate-200/50 hover:-translate-y-1">
               <div className="flex justify-between items-start mb-6">
                 {/* --- ICON BOX --- */}
                 <div className="p-2.5 bg-slate-50 rounded-xl border border-slate-100">
@@ -154,7 +154,7 @@ const Works = () => {
               {/* RESTORED: Metadata Grid (Category/Date) */}
               <div className="grid grid-cols-2 gap-4 text-[11px] font-medium text-slate-400">
                 <div className="flex items-center gap-2">
-                  <Layout size={14} /> @{proj.category}
+                  <Layout size={14} /> @{proj.categoryIcons}
                 </div>
                 <div className="flex items-center gap-2">
                   <Clock size={14} /> {proj.date}
