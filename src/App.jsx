@@ -224,11 +224,11 @@ const ProjectDetail = () => {
             </div>
 
             {/* METADATA GRID */}
-            <div className="grid grid-cols-2 gap-y-12 gap-x-8">
+            <div className="grid grid-cols-2 gap-y-8 gap-x-12">
               
               {/* Completion Metric */}
               <div className="space-y-3">
-                <span className="block text-[12px] font-mono text-slate-400 uppercase tracking-widest">01_Completion</span>
+                <span className="block text-[12px] font-mono text-slate-400 uppercase tracking-widest">01 Completion</span>
                 <div className="flex items-baseline gap-2">
                   <span className="text-4xl font-light tracking-tighter text-slate-900">{project.progress}%</span>
                 </div>
@@ -242,7 +242,7 @@ const ProjectDetail = () => {
 
               {/* Priority Metric */}
               <div className="space-y-3">
-                <span className="block text-[12px] font-mono text-slate-400 uppercase tracking-widest">02_Priority</span>
+                <span className="block text-[12px] font-mono text-slate-400 uppercase tracking-widest">02 Priority</span>
                 <span className="block text-xl font-medium text-slate-900 italic uppercase tracking-tight">
                   {project.priority}
                 </span>
@@ -250,11 +250,11 @@ const ProjectDetail = () => {
 
               {/* Tasks Metric */}
               <div className="space-y-3 col-span-2 pt-6 border-t border-slate-50">
-                <span className="block text-[12px] font-mono text-slate-400 uppercase tracking-widest">03_Deliverables</span>
+                <span className="block text-[12px] font-mono text-slate-400 uppercase tracking-widest">03 Deliverables</span>
                 <div className="flex items-center gap-3">
                   <CheckCircle2 size={18} className="text-blue-600" />
                   <span className="text-xl font-medium text-slate-900">
-                    {project.tasks} <span className="text-slate-400 font-light">Total Units</span>
+                    {project.tasks} <span className="text-slate-400 font-light">Tasks closed</span>
                   </span>
                 </div>
               </div>
