@@ -133,7 +133,7 @@ const Works = () => {
       <div className="flex-grow grid grid-cols-1 lg:grid-cols-2 gap-6">
         {filteredProjects.map((proj) => (
           <Link key={proj.id} to={`/works/${proj.id}`} className="block group">
-            <div className="bg-slate- border border-slate-100 rounded-2xl p-6 shadow-sm transition-all duration-500 ease-out hover:bg-white hover:shadow-lg hover:shadow-slate-200/50 hover:-translate-y-1">
+           <div className="bg-slate-25 border border-slate-100 rounded-2xl p-6 shadow-sm transition-all duration-500 ease-out hover:bg-white hover:border-slate-150 hover:shadow-lg hover:shadow-slate-200/50 hover:-translate-y-1">
               <div className="flex justify-between items-start mb-6">
                 {/* --- ICON BOX --- */}
                 <div className="p-2.5 bg-slate-50 rounded-xl border border-slate-100">
@@ -151,17 +151,17 @@ const Works = () => {
               <h3 className="font-bold text-xl mb-2 group-hover:text-blue-600 transition-colors">{proj.title}</h3>
               <p className="text-sm text-slate-500 mb-6 line-clamp-2">{proj.description}</p>
 
-              {/* RESTORED: Metadata Grid (Category/Date) */}
+              {/* RESTORED: Metadata Grid (Category/Date) with Dynamic Icons */}
               <div className="grid grid-cols-2 gap-4 text-[11px] font-medium text-slate-400">
                 <div className="flex items-center gap-2">
-                  <Layout size={14} /> @{proj.categoryIcons}
+                  {/* This pulls the specific icon (Cpu, Search, etc.) and scales it to size 14 */}
+                  {React.cloneElement(categoryIcons[proj.category] || categoryIcons["Default"], { size: 14, className: "text-slate-400" })}
+                  @{proj.category}
                 </div>
                 <div className="flex items-center gap-2">
                   <Clock size={14} /> {proj.date}
                 </div>
               </div>
-
-              {/* REMOVED: Progress Bar/Tasks/Priority section */}
 
             </div>
           </Link>
@@ -189,14 +189,14 @@ const ProjectDetail = () => {
         {/* LEFT COLUMN: The Narrative */}
         <div className="lg:col-span-7">
           <div className="flex items-center gap-3 mb-6">
-             <span className="text-[10px] font-bold uppercase tracking-[0.3em] text-blue-600 italic">{project.category}</span>
-             <span className="h-px w-8 bg-slate-200"></span>
-             <span className="text-[10px] font-mono text-slate-400 uppercase">{project.date}</span>
+            <span className="text-[10px] font-bold uppercase tracking-[0.3em] text-blue-600 italic">{project.category}</span>
+            <span className="h-px w-8 bg-slate-200"></span>
+            <span className="text-[10px] font-mono text-slate-400 uppercase">{project.date}</span>
           </div>
-          
+
           <h2 className="text-5xl font-bold tracking-tighter mb-8">{project.title}</h2>
           <p className="text-xl text-slate-600 leading-relaxed mb-10">{project.description}</p>
-          
+
           <div className="space-y-6">
             <h4 className="font-bold text-sm uppercase tracking-widest border-b border-slate-100 pb-2">The Challenge</h4>
             <p className="text-slate-700 leading-relaxed">{project.challenge}</p>
@@ -228,10 +228,10 @@ const ProjectDetail = () => {
                     <span className="text-sm font-bold uppercase italic text-slate-900">{project.priority}</span>
                   </div>
                 </div>
-                
+
                 <div className="h-3 w-full bg-slate-200 rounded-full overflow-hidden">
-                  <div 
-                    className="h-full bg-orange-500 rounded-full transition-all duration-1000" 
+                  <div
+                    className="h-full bg-orange-500 rounded-full transition-all duration-1000"
                     style={{ width: `${project.progress}%` }}
                   ></div>
                 </div>
@@ -240,7 +240,7 @@ const ProjectDetail = () => {
               {/* Task Counter Group */}
               <div className="flex items-center gap-4 p-4 bg-white border border-slate-100 rounded-2xl shadow-sm">
                 <div className="p-2 bg-slate-50 rounded-lg">
-                   <CheckCircle2 size={20} className="text-blue-600" />
+                  <CheckCircle2 size={20} className="text-blue-600" />
                 </div>
                 <div>
                   <span className="block text-[10px] font-bold text-slate-400 uppercase tracking-widest">Deliverables</span>
