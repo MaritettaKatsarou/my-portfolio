@@ -186,7 +186,10 @@ const ProjectDetail = () => {
   return (
     <section className="animate-in fade-in slide-in-from-bottom-4 duration-700 max-w-5xl mx-auto">
       {/* Back Button */}
-      <button onClick={() => navigate('/works')} className="text-xs font-mono uppercase tracking-widest text-blue-600 mb-12 flex items-center gap-2 hover:gap-4 transition-all">
+      <button 
+        onClick={() => navigate('/works')} 
+        className="text-xs font-mono uppercase tracking-widest text-blue-600 mb-12 flex items-center gap-2 hover:gap-4 transition-all"
+      >
         ← Back to Works
       </button>
 
@@ -208,73 +211,61 @@ const ProjectDetail = () => {
           </div>
         </div>
 
-        {/* RIGHT COLUMN: The "System Status" Dashboard */}
+        {/* RIGHT COLUMN: Redesigned System Status */}
         <div className="lg:col-span-5">
-          <div className="bg-slate-50 border border-slate-200 rounded-3xl p-8 sticky top-32">
-            <div className="flex justify-between items-center mb-8">
-              <h3 className="font-bold text-xs uppercase tracking-widest text-slate-900">Project Status</h3>
-              <span className={`text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-wider 
-                ${project.status === 'Active' ? 'bg-green-100 text-green-700' : 'bg-blue-100 text-blue-700'}`}>
+          <div className="sticky top-32 px-4 py-2 border-l-2 border-slate-100">
+            <div className="flex justify-between items-center mb-12">
+              <h3 className="font-mono text-[10px] uppercase tracking-[0.3em] text-slate-400">System_Status</h3>
+              <span className={`text-[10px] font-bold px-2 py-0.5 rounded-sm uppercase tracking-wider 
+                ${project.status === 'Active' ? 'bg-green-50 text-green-600' : 
+                  project.status === 'Completed' ? 'bg-blue-50 text-blue-600' : 'bg-slate-100 text-slate-500'}`}>
                 {project.status}
               </span>
             </div>
 
-            {/* THE METADATA BLOCK FROM THE CARDS */}
-            {/* --- REDESIGNED SYSTEM STATUS (Side Column) --- */}
-            <div className="lg:col-span-5">
-              <div className="sticky top-32 px-4 py-2 border-l-2 border-slate-100">
-                <div className="flex justify-between items-center mb-12">
-                  <h3 className="font-mono text-[10px] uppercase tracking-[0.3em] text-slate-400">System_Status</h3>
-                  <span className={`text-[10px] font-bold px-2 py-0.5 rounded-sm uppercase tracking-wider 
-        ${project.status === 'Active' ? 'bg-green-50 text-green-600' : 'bg-blue-50 text-blue-600'}`}>
-                    {project.status}
-                  </span>
+            {/* METADATA GRID */}
+            <div className="grid grid-cols-2 gap-y-12 gap-x-8">
+              
+              {/* Completion Metric */}
+              <div className="space-y-3">
+                <span className="block text-[10px] font-mono text-slate-400 uppercase tracking-widest">01_Completion</span>
+                <div className="flex items-baseline gap-2">
+                  <span className="text-4xl font-light tracking-tighter text-slate-900">{project.progress}%</span>
                 </div>
-
-                {/* METADATA GRID */}
-                <div className="grid grid-cols-2 gap-y-12 gap-x-8">
-
-                  {/* Completion Metric */}
-                  <div className="space-y-3">
-                    <span className="block text-[10px] font-mono text-slate-400 uppercase tracking-widest">01_Completion</span>
-                    <div className="flex items-baseline gap-2">
-                      <span className="text-4xl font-light tracking-tighter text-slate-900">{project.progress}%</span>
-                    </div>
-                    <div className="h-1 w-full bg-slate-100 overflow-hidden">
-                      <div
-                        className="h-full bg-blue-600 transition-all duration-1000"
-                        style={{ width: `${project.progress}%` }}
-                      />
-                    </div>
-                  </div>
-
-                  {/* Priority Metric */}
-                  <div className="space-y-3">
-                    <span className="block text-[10px] font-mono text-slate-400 uppercase tracking-widest">02_Priority</span>
-                    <span className="block text-xl font-medium text-slate-900 italic uppercase tracking-tight">
-                      {project.priority}
-                    </span>
-                  </div>
-
-                  {/* Tasks Metric */}
-                  <div className="space-y-3 col-span-2 pt-6 border-t border-slate-50">
-                    <span className="block text-[10px] font-mono text-slate-400 uppercase tracking-widest">03_Deliverables</span>
-                    <div className="flex items-center gap-3">
-                      <CheckCircle2 size={18} className="text-blue-600" />
-                      <span className="text-xl font-medium text-slate-900">{project.tasks} <span className="text-slate-400 font-light">Total Units</span></span>
-                    </div>
-                  </div>
-
-                </div>
-
-                {/* Footer Detail */}
-                <div className="mt-16 pt-8 border-t border-slate-100">
-                  <p className="text-[10px] font-mono text-slate-300 uppercase leading-relaxed">
-        // Data integrity verified <br />
-        // Last system update: {project.date}
-                  </p>
+                <div className="h-1 w-full bg-slate-100 overflow-hidden">
+                  <div 
+                    className="h-full bg-blue-600 transition-all duration-1000" 
+                    style={{ width: `${project.progress}%` }}
+                  />
                 </div>
               </div>
+
+              {/* Priority Metric */}
+              <div className="space-y-3">
+                <span className="block text-[10px] font-mono text-slate-400 uppercase tracking-widest">02_Priority</span>
+                <span className="block text-xl font-medium text-slate-900 italic uppercase tracking-tight">
+                  {project.priority}
+                </span>
+              </div>
+
+              {/* Tasks Metric */}
+              <div className="space-y-3 col-span-2 pt-6 border-t border-slate-50">
+                <span className="block text-[10px] font-mono text-slate-400 uppercase tracking-widest">03_Deliverables</span>
+                <div className="flex items-center gap-3">
+                  <CheckCircle2 size={18} className="text-blue-600" />
+                  <span className="text-xl font-medium text-slate-900">
+                    {project.tasks} <span className="text-slate-400 font-light">Total Units</span>
+                  </span>
+                </div>
+              </div>
+            </div>
+
+            {/* Footer Detail */}
+            <div className="mt-16 pt-8 border-t border-slate-100">
+              <p className="text-[10px] font-mono text-slate-300 uppercase leading-relaxed">
+                // Data integrity verified <br />
+                // Last system update: {project.date}
+              </p>
             </div>
           </div>
         </div>
