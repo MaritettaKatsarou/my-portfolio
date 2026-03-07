@@ -212,11 +212,11 @@ const ProjectDetail = () => {
         </div>
 
         {/* RIGHT COLUMN: Redesigned System Status */}
-        <div className="lg:col-span-5">
+        <div className="lg:col-span-4">
           <div className="sticky top-32 px-4 py-2 border-l-2 border-slate-100">
             <div className="flex justify-between items-center mb-12">
-              <h3 className="font-mono text-[10px] uppercase tracking-[0.3em] text-slate-400">System_Status</h3>
-              <span className={`text-[10px] font-bold px-2 py-0.5 rounded-sm uppercase tracking-wider 
+              <h3 className="font-mono text-[12px] uppercase tracking-[0.3em] text-slate-400">System_Status</h3>
+              <span className={`text-[12px] font-bold px-2 py-0.5 rounded-sm uppercase tracking-wider 
                 ${project.status === 'Active' ? 'bg-green-50 text-green-600' : 
                   project.status === 'Completed' ? 'bg-blue-50 text-blue-600' : 'bg-slate-100 text-slate-500'}`}>
                 {project.status}
@@ -228,7 +228,7 @@ const ProjectDetail = () => {
               
               {/* Completion Metric */}
               <div className="space-y-3">
-                <span className="block text-[10px] font-mono text-slate-400 uppercase tracking-widest">01_Completion</span>
+                <span className="block text-[12px] font-mono text-slate-400 uppercase tracking-widest">01_Completion</span>
                 <div className="flex items-baseline gap-2">
                   <span className="text-4xl font-light tracking-tighter text-slate-900">{project.progress}%</span>
                 </div>
@@ -242,7 +242,7 @@ const ProjectDetail = () => {
 
               {/* Priority Metric */}
               <div className="space-y-3">
-                <span className="block text-[10px] font-mono text-slate-400 uppercase tracking-widest">02_Priority</span>
+                <span className="block text-[12px] font-mono text-slate-400 uppercase tracking-widest">02_Priority</span>
                 <span className="block text-xl font-medium text-slate-900 italic uppercase tracking-tight">
                   {project.priority}
                 </span>
@@ -250,7 +250,7 @@ const ProjectDetail = () => {
 
               {/* Tasks Metric */}
               <div className="space-y-3 col-span-2 pt-6 border-t border-slate-50">
-                <span className="block text-[10px] font-mono text-slate-400 uppercase tracking-widest">03_Deliverables</span>
+                <span className="block text-[12px] font-mono text-slate-400 uppercase tracking-widest">03_Deliverables</span>
                 <div className="flex items-center gap-3">
                   <CheckCircle2 size={18} className="text-blue-600" />
                   <span className="text-xl font-medium text-slate-900">
@@ -262,9 +262,9 @@ const ProjectDetail = () => {
 
             {/* Footer Detail */}
             <div className="mt-16 pt-8 border-t border-slate-100">
-              <p className="text-[10px] font-mono text-slate-300 uppercase leading-relaxed">
+              <p className="text-[12px] font-mono text-slate-300 uppercase leading-relaxed">
                 // Data integrity verified <br />
-                // Last system update: {project.date}
+                // Last system update: {new Date().toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}
               </p>
             </div>
           </div>
