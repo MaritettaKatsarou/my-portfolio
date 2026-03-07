@@ -136,7 +136,7 @@ const Works = () => {
             <div className="bg-slate- border border-slate-200 rounded-2xl p-6 shadow-sm transition-all duration-500 ease-out hover:bg-white hover:shadow-xl hover:shadow-slate-200/50 hover:-translate-y-1">
               <div className="flex justify-between items-start mb-6">
                 {/* --- ICON BOX --- */}
-                <div className="p-2.5 bg-slate-50 rounded-xl border border-slate-100 group-hover:bg-white transition-colors">
+                <div className="p-2.5 bg-slate-50 rounded-xl border border-slate-100">
                   {categoryIcons[proj.category] || categoryIcons["Default"]}
                 </div>
                 <span className={`text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-wider flex items-center gap-1.5 
