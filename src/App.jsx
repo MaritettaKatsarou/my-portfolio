@@ -101,7 +101,7 @@ const Works = () => {
 
         {/* Using flex-row flex-wrap on mobile, flex-col on desktop */}
         <div className="flex flex-row flex-wrap md:flex-col gap-8">
-
+          
           {/* Category Group */}
           <div className="flex-1 min-w-[140px]">
             <h4 className="text-[10px] font-bold uppercase tracking-widest text-slate-400 mb-4 italic">Category</h4>
@@ -133,7 +133,7 @@ const Works = () => {
               ))}
             </div>
           </div>
-
+          
         </div>
       </aside>
 
@@ -336,64 +336,36 @@ export default function App() {
       <div className="min-h-screen bg-white text-slate-900 selection:bg-blue-100 flex flex-col">
 
         {/* --- NAVIGATION BAR --- */}
-        <nav className="fixed top-0 w-full h-20 flex items-center justify-between px-8 md:px-16 bg-white/60 backdrop-blur-lg z-50 shadow-sm shadow-slate-100/50">
+       <nav className="fixed top-0 w-full h-20 flex items-center justify-between px-8 md:px-16 bg-white/60 backdrop-blur-lg z-50 shadow-sm shadow-slate-100/50">
           <Link to="/" onClick={closeMenu} className="font-bold tracking-tighter text-xl">My-portfolio</Link>
 
           {/* Desktop Menu */}
-          <div className="hidden md:flex gap-8 text-[11px] font-bold uppercase tracking-[0.2em] items-center">
-            // 1. First, import useLocation at the top with your other hooks
-            import {useLocation, Link} from 'react-router-dom';
-
-            // 2. Inside your App component:
-            export default function App() {
-  const [isMenuOpen, setIsMenuOpen] = React.useState(false);
-            const location = useLocation(); // This "listens" to the current URL
-
-            const navItems = [
-            {name: '/', label: 'home' },
-            {name: '/works', label: 'works' },
-            {name: '/about', label: 'about me' },
-            {name: '/test', label: 'test' },
-            {name: '/contact', label: 'contact' }
-            ];
+        <div className="hidden md:flex gap-8 text-[11px] font-bold uppercase tracking-[0.2em] items-center">
+          {navItems.map((item) => {
+            const isActive = item.name === '/' 
+              ? location.pathname === '/' 
+              : location.pathname.startsWith(item.name);
 
             return (
-            // ... navigation bar opening tags ...
-            <div className="hidden md:flex gap-8 text-[11px] font-bold uppercase tracking-[0.2em] items-center">
-              {navItems.map((item) => {
-                // --- ACTIVE LOGIC ---
-                // 'home' is active only on exact match '/'
-                // 'works' is active if path starts with '/works' (covers sub-pages)
-                const isActive = item.name === '/'
-                  ? location.pathname === '/'
-                  : location.pathname.startsWith(item.name);
-
-                return (
-                  <Link
-                    key={item.name}
-                    to={item.name}
-                    onClick={() => setIsMenuOpen(false)}
-                    className={`transition-all duration-300 ${item.name === '/contact'
-                        ? 'border border-slate-900 px-4 py-2 rounded-full ml-4 hover:bg-slate-900 hover:text-white'
-                        : isActive
-                          ? 'text-blue-600 translate-y-[-1px]' // Active State
-                          : 'text-slate-400 hover:text-blue-600' // Inactive State
-                      }`}
-                  >
-                    {/* Optional: Add a small dot under the active item */}
-                    <div className="flex flex-col items-center">
-                      {item.label}
-                      {isActive && item.name !== '/contact' && (
-                        <span className="absolute -bottom-1 w-1 h-1 bg-blue-600 rounded-full animate-in zoom-in"></span>
-                      )}
-                    </div>
-                  </Link>
-                );
-              })}
-            </div>
-    // ...
+              <Link
+                key={item.name}
+                to={item.name}
+                onClick={closeMenu}
+                className={`relative transition-colors ${
+                  item.name === '/contact' 
+                    ? 'border border-slate-900 px-4 py-2 rounded-full ml-4 hover:bg-slate-900 hover:text-white' 
+                    : isActive 
+                      ? 'text-blue-600' 
+                      : 'text-slate-400 hover:text-blue-600'
+                }`}
+              >
+                {item.label}
+                {isActive && item.name !== '/contact' && (
+                  <span className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-1 h-1 bg-blue-600 rounded-full"></span>
+                )}
+              </Link>
             );
-}
+          })}
           </div>
 
           {/* Mobile Toggle */}
