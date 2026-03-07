@@ -1,6 +1,6 @@
 import React from 'react';
 import { HashRouter as BrowserRouter, Routes, Route, Link, useNavigate, useParams } from 'react-router-dom';
-import { Menu, X, Folder, Clock, CheckCircle2, Layout } from 'lucide-react';
+import { Menu, X, Folder, Clock, CheckCircle2, Layout, BookOpen, Search, Cpu } from 'lucide-react';
 
 // --- 1. DATA ARCHITECTURE ---
 // Moving data to a constant so it's accessible by all components
@@ -70,6 +70,14 @@ const Home = () => (
   </section>
 );
 
+const categoryIcons = {
+  "Product Design": <Layout size={20} className="text-blue-600" />,
+  "EdTech": <BookOpen size={20} className="text-purple-600" />,
+  "UX Audit": <Search size={20} className="text-orange-600" />,
+  "Systems": <Cpu size={20} className="text-green-600" />,
+  "Default": <Folder size={20} className="text-slate-600" />
+};
+
 const Works = () => {
   const [filterCategory, setFilterCategory] = React.useState('All');
   const [filterStatus, setFilterStatus] = React.useState('All');
@@ -127,8 +135,9 @@ const Works = () => {
           <Link key={proj.id} to={`/works/${proj.id}`} className="block group">
             <div className="bg-slate- border border-slate-200 rounded-2xl p-6 shadow-sm transition-all duration-500 ease-out hover:bg-white hover:shadow-xl hover:shadow-slate-200/50 hover:-translate-y-1">
               <div className="flex justify-between items-start mb-6">
-                <div className="p-2.5 bg-slate-50 rounded-xl border border-slate-100">
-                  <Folder size={20} className="text-slate-600" />
+                {/* --- ICON BOX --- */}
+                <div className="p-2.5 bg-slate-50 rounded-xl border border-slate-100 group-hover:bg-white transition-colors">
+                  {categoryIcons[proj.category] || categoryIcons["Default"]}
                 </div>
                 <span className={`text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-wider flex items-center gap-1.5 
                   ${proj.status === 'Active' ? 'bg-green-50 text-green-600' :
