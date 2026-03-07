@@ -149,11 +149,25 @@ const Works = () => {
               </div>
 
               <h3 className="font-bold text-xl mb-2 group-hover:text-blue-600 transition-colors">{proj.title}</h3>
-              <p className="text-sm text-slate-500 line-clamp-2">{proj.description}</p>
-              
-              {/* Removed: Metadata Grid (Category/Date) */}
-              {/* Removed: Progress Bar/Tasks/Priority section */}
+              <p className="text-sm text-slate-500 mb-6 line-clamp-2">{proj.description}</p>
 
+              {/* Only the Progress/Tasks section remains below */}
+              <div className="space-y-3 pt-6 border-t border-slate-100">
+                <div className="flex justify-between items-center text-[10px] font-bold uppercase tracking-widest">
+                  <div className="flex items-center gap-2">
+                    <span className="text-orange-600 font-mono">{proj.progress}%</span>
+                    <span className="text-slate-200">|</span>
+                    <span className="text-slate-600">{proj.tasks} Tasks</span>
+                  </div>
+                  <span className="text-slate-400 italic font-mono">{proj.priority}</span>
+                </div>
+                <div className="h-2 w-full bg-slate-100 rounded-full overflow-hidden">
+                  <div
+                    className={`h-full rounded-full transition-all duration-1000 ${proj.status === 'Completed' ? 'bg-blue-500' : 'bg-orange-500'}`}
+                    style={{ width: `${proj.progress}%` }}
+                  ></div>
+                </div>
+              </div>
             </div>
           </Link>
         ))}
