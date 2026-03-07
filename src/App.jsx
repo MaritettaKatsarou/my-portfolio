@@ -336,7 +336,7 @@ export default function App() {
       <div className="min-h-screen bg-white text-slate-900 selection:bg-blue-100 flex flex-col">
 
         {/* --- NAVIGATION BAR --- */}
-       <nav className="fixed top-0 w-full h-20 flex items-center justify-between px-8 md:px-16 bg-white/70 backdrop-blur-lg z-50 shadow-sm shadow-slate-200/50">
+       <nav className="fixed top-0 w-full h-20 flex items-center justify-between px-8 md:px-16 bg-white/60 backdrop-blur-lg z-50 shadow-sm shadow-slate-100/50">
           <Link to="/" onClick={closeMenu} className="font-bold tracking-tighter text-xl">My-portfolio</Link>
 
           {/* Desktop Menu */}
@@ -410,7 +410,7 @@ export default function App() {
           </div>
           <div className="max-w-6xl mx-auto mt-16 pt-8 border-t border-slate-50 flex flex-col md:flex-row justify-between items-center gap-4 text-[10px] text-slate-300 font-mono uppercase tracking-[0.2em]">
             <span>© 2026 All Rights Reserved</span>
-            <span>Designed with Systems Mindset</span>
+            <span>Designed by Maritetta</span>
           </div>
         </footer>
 
