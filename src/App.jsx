@@ -198,7 +198,6 @@ const ProjectDetail = () => {
         <div className="lg:col-span-7">
           
           <h2 className="text-5xl font-bold tracking-tighter mb-8">{project.title}</h2>
-          <p className="text-xl text-slate-600 leading-relaxed mb-10">{project.description}</p>
 
           <div className="flex items-center gap-3 mb-6">
             <span className="text-[10px] font-bold uppercase tracking-[0.3em] text-blue-600 italic">{project.category}</span>
@@ -206,6 +205,8 @@ const ProjectDetail = () => {
             <span className="text-[10px] font-mono text-slate-400 uppercase">{project.date}</span>
           </div>
 
+          <p className="text-xl text-slate-600 leading-relaxed mb-10">{project.description}</p>
+          
           <div className="space-y-6">
             <h4 className="font-bold text-sm uppercase tracking-widest border-b border-slate-100 pb-2">The Challenge</h4>
             <p className="text-slate-700 leading-relaxed">{project.challenge}</p>
