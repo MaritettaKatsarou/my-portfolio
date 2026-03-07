@@ -336,7 +336,7 @@ export default function App() {
       <div className="min-h-screen bg-white text-slate-900 selection:bg-blue-100 flex flex-col">
 
         {/* --- NAVIGATION BAR --- */}
-        <nav className="fixed top-0 w-full h-20 flex items-center justify-between px-8 md:px-16 bg-white/60 backdrop-blur-md z-50 border-b border-slate-50">
+       <nav className="fixed top-0 w-full h-20 flex items-center justify-between px-8 md:px-16 bg-white/70 backdrop-blur-lg z-50 shadow-sm shadow-slate-200/50">
           <Link to="/" onClick={closeMenu} className="font-bold tracking-tighter text-xl">My-portfolio</Link>
 
           {/* Desktop Menu */}
