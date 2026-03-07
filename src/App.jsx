@@ -186,8 +186,8 @@ const ProjectDetail = () => {
   return (
     <section className="animate-in fade-in slide-in-from-bottom-4 duration-700 max-w-5xl mx-auto">
       {/* Back Button */}
-      <button 
-        onClick={() => navigate('/works')} 
+      <button
+        onClick={() => navigate('/works')}
         className="text-xs font-mono uppercase tracking-widest text-blue-600 mb-12 flex items-center gap-2 hover:gap-4 transition-all"
       >
         ← Back to Works
@@ -196,14 +196,15 @@ const ProjectDetail = () => {
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-16">
         {/* LEFT COLUMN: The Narrative */}
         <div className="lg:col-span-7">
+          
+          <h2 className="text-5xl font-bold tracking-tighter mb-8">{project.title}</h2>
+          <p className="text-xl text-slate-600 leading-relaxed mb-10">{project.description}</p>
+
           <div className="flex items-center gap-3 mb-6">
             <span className="text-[10px] font-bold uppercase tracking-[0.3em] text-blue-600 italic">{project.category}</span>
             <span className="h-px w-8 bg-slate-200"></span>
             <span className="text-[10px] font-mono text-slate-400 uppercase">{project.date}</span>
           </div>
-
-          <h2 className="text-5xl font-bold tracking-tighter mb-8">{project.title}</h2>
-          <p className="text-xl text-slate-600 leading-relaxed mb-10">{project.description}</p>
 
           <div className="space-y-6">
             <h4 className="font-bold text-sm uppercase tracking-widest border-b border-slate-100 pb-2">The Challenge</h4>
@@ -217,7 +218,7 @@ const ProjectDetail = () => {
             <div className="flex justify-between items-center mb-12">
               <h3 className="font-mono text-[12px] uppercase tracking-[0.3em] text-slate-400">System_Status</h3>
               <span className={`text-[12px] font-bold px-2 py-0.5 rounded-sm uppercase tracking-wider 
-                ${project.status === 'Active' ? 'bg-green-50 text-green-600' : 
+                ${project.status === 'Active' ? 'bg-green-50 text-green-600' :
                   project.status === 'Completed' ? 'bg-blue-50 text-blue-600' : 'bg-slate-100 text-slate-500'}`}>
                 {project.status}
               </span>
@@ -225,7 +226,7 @@ const ProjectDetail = () => {
 
             {/* METADATA GRID */}
             <div className="grid grid-cols-2 gap-y-8 gap-x-12">
-              
+
               {/* Completion Metric */}
               <div className="space-y-3">
                 <span className="block text-[12px] font-mono text-slate-400 uppercase tracking-widest">01 Completion</span>
@@ -233,8 +234,8 @@ const ProjectDetail = () => {
                   <span className="text-4xl font-light tracking-tighter text-slate-900">{project.progress}%</span>
                 </div>
                 <div className="h-1 w-full bg-slate-100 overflow-hidden">
-                  <div 
-                    className="h-full bg-blue-600 transition-all duration-1000" 
+                  <div
+                    className="h-full bg-blue-600 transition-all duration-1000"
                     style={{ width: `${project.progress}%` }}
                   />
                 </div>
@@ -261,7 +262,7 @@ const ProjectDetail = () => {
             </div>
 
             {/* Footer Detail */}
-            <div className="mt-16 pt-8 border-t border-slate-100">
+            <div className="mt-8 pt-8 border-t border-slate-100">
               <p className="text-[12px] font-mono text-slate-300 uppercase leading-relaxed">
                 // Data integrity verified <br />
                 // Last system update: {new Date().toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}
