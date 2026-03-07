@@ -316,9 +316,9 @@ const Test = () => (
 );
 
 // --- 3. MAIN APP ENTRY ---
+
 export default function App() {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
-  const location = useLocation();
 
   const navItems = [
     { name: '/', label: 'home' },
@@ -332,78 +332,89 @@ export default function App() {
   const closeMenu = () => setIsMenuOpen(false);
 
   return (
-    <div className="min-h-screen bg-white text-slate-900 selection:bg-blue-100 flex flex-col">
-      {/* --- NAVIGATION BAR --- */}
-      <nav className="fixed top-0 w-full h-20 flex items-center justify-between px-8 md:px-16 bg-white/70 backdrop-blur-lg z-50 shadow-sm shadow-slate-200/50">
-        <Link to="/" onClick={closeMenu} className="font-bold tracking-tighter text-xl">My-portfolio</Link>
+    <BrowserRouter>
+      <div className="min-h-screen bg-white text-slate-900 selection:bg-blue-100 flex flex-col">
 
-        {/* Desktop Menu */}
-        <div className="hidden md:flex gap-8 text-[11px] font-bold uppercase tracking-[0.2em] items-center">
-          {navItems.map((item) => {
-            const isActive = item.name === '/' 
-              ? location.pathname === '/' 
-              : location.pathname.startsWith(item.name);
+        {/* --- NAVIGATION BAR --- */}
+       <nav className="fixed top-0 w-full h-20 flex items-center justify-between px-8 md:px-16 bg-white/60 backdrop-blur-lg z-50 shadow-sm shadow-slate-100/50">
+          <Link to="/" onClick={closeMenu} className="font-bold tracking-tighter text-xl">My-portfolio</Link>
 
-            return (
+          {/* Desktop Menu */}
+          <div className="hidden md:flex gap-8 text-[11px] font-bold uppercase tracking-[0.2em] items-center">
+            {navItems.map((item) => (
               <Link
                 key={item.name}
                 to={item.name}
                 onClick={closeMenu}
-                className={`relative transition-colors ${
-                  item.name === '/contact' 
-                    ? 'border border-slate-900 px-4 py-2 rounded-full ml-4 hover:bg-slate-900 hover:text-white' 
-                    : isActive 
-                      ? 'text-blue-600' 
-                      : 'text-slate-400 hover:text-blue-600'
-                }`}
-              >
-                {item.label}
-                {isActive && item.name !== '/contact' && (
-                  <span className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-1 h-1 bg-blue-600 rounded-full"></span>
-                )}
-              </Link>
-            );
-          })}
-        </div>
-
-        {/* Mobile Toggle */}
-        <button className="md:hidden p-2 text-slate-900 z-50" onClick={toggleMenu}>
-          {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
-        </button>
-      </nav>
-
-      {/* Mobile Menu Overlay */}
-      {isMenuOpen && (
-        <div className="fixed inset-0 bg-white z-40 flex flex-col items-center justify-center gap-8 animate-in fade-in zoom-in duration-300 md:hidden">
-          {navItems.map((item) => {
-            const isActive = item.name === '/' ? location.pathname === '/' : location.pathname.startsWith(item.name);
-            return (
-              <Link 
-                key={item.name} 
-                to={item.name} 
-                onClick={closeMenu} 
-                className={`text-2xl font-bold uppercase tracking-widest ${isActive ? 'text-blue-600' : 'text-slate-900'}`}
+                className={`transition-colors ${item.name === '/contact' ? 'border border-slate-900 px-4 py-2 rounded-full ml-4' : 'text-slate-400 hover:text-blue-600'}`}
               >
                 {item.label}
               </Link>
-            );
-          })}
-        </div>
-      )}
+            ))}
+          </div>
 
-      {/* --- DYNAMIC CONTENT --- */}
-      <main className="pt-40 px-8 md:px-16 pb-20 max-w-6xl mx-auto flex-grow w-full">
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/works" element={<Works />} />
-          <Route path="/works/:projectId" element={<ProjectDetail />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/test" element={<Test />} />
-          <Route path="/contact" element={<Contact />} />
-        </Routes>
-      </main>
+          {/* Mobile Toggle */}
+          <button className="md:hidden p-2 text-slate-900 z-50" onClick={toggleMenu}>
+            {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
+          </button>
+        </nav>
 
-      {/* --- FOOTER (Your existing footer code here) --- */}
-    </div>
+        {/* Mobile Menu Overlay */}
+        {isMenuOpen && (
+          <div className="fixed inset-0 bg-white z-40 flex flex-col items-center justify-center gap-8 animate-in fade-in zoom-in duration-300 md:hidden">
+            {navItems.map((item) => (
+              <Link key={item.name} to={item.name} onClick={closeMenu} className="text-2xl font-bold uppercase tracking-widest text-slate-900">
+                {item.label}
+              </Link>
+            ))}
+          </div>
+        )}
+
+        {/* --- DYNAMIC CONTENT --- */}
+        <main className="pt-40 px-8 md:px-16 pb-20 max-w-6xl mx-auto flex-grow w-full">
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/works" element={<Works />} />
+            <Route path="/works/:projectId" element={<ProjectDetail />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/test" element={<Test />} />
+            <Route path="/contact" element={<Contact />} />
+          </Routes>
+        </main>
+
+        {/* --- FOOTER --- */}
+        <footer className="px-8 md:px-16 py-12 border-t border-slate-100 bg-white mt-auto">
+          <div className="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-start gap-12">
+            <div className="space-y-4">
+              <div className="font-bold tracking-tighter text-lg">My-portfolio</div>
+              <div className="flex items-center gap-2">
+                <span className="relative flex h-2 w-2">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+                  <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
+                </span>
+                <span className="text-[10px] font-mono text-slate-400 uppercase tracking-widest">System Live // Athens, GR</span>
+              </div>
+            </div>
+            <div className="grid grid-cols-2 gap-8 md:gap-16 w-full md:w-auto">
+              <div className="flex flex-col gap-3">
+                <h4 className="text-[10px] font-bold text-slate-900 uppercase tracking-widest mb-2">Connect</h4>
+                <a href="https://linkedin.com/in/maritettakatsarou" target="_blank" rel="noreferrer" className="text-sm text-slate-500 hover:text-blue-600 transition-colors">LinkedIn</a>
+                <a href="https://github.com/MaritettaKatsarou" target="_blank" rel="noreferrer" className="text-sm text-slate-500 hover:text-blue-600 transition-colors">GitHub</a>
+              </div>
+              <div className="flex flex-col gap-3">
+                <h4 className="text-[10px] font-bold text-slate-900 uppercase tracking-widest mb-2">Platform</h4>
+                <span className="text-sm text-slate-400">Vite + React</span>
+                <span className="text-sm text-slate-400">Tailwind CSS</span>
+              </div>
+            </div>
+          </div>
+          <div className="max-w-6xl mx-auto mt-16 pt-8 border-t border-slate-50 flex flex-col md:flex-row justify-between items-center gap-4 text-[10px] text-slate-300 font-mono uppercase tracking-[0.2em]">
+            <span>© 2026 All Rights Reserved</span>
+            <span>Designed by Maritetta</span>
+          </div>
+        </footer>
+
+      </div>
+    </BrowserRouter>
   );
 }
