@@ -342,7 +342,7 @@ const About = () => (
         <LogoSVG />
         
         {/* Optional: Minimalist floating tag underneath */}
-        <p className="mt-8 font-mono text-[10px] uppercase tracking-[0.3em] text-slate-300 text-center transition-colors group-hover:text-blue-500">
+        <p className="mt-8 font-mono text-[10px] uppercase tracking-[0.3em] text-slate-300 text-center transition-colors group-hover:text-slate-900">
           // my-portfolio-logo
         </p>
       </div>
