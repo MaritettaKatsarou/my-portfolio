@@ -263,9 +263,9 @@ const ProjectDetail = () => {
 
               {/* Priority Metric */}
               <div className="space-y-3 flex flex-col items-end">
-                {/* 'items-end' pushes the label and the value to the right of the grid cell */}
+                {/* 'items-end' pushes the label and the value to the right of the grid cell. */}
                 <span className="block text-[12px] font-mono text-slate-400 uppercase tracking-widest text-right">
-                  02 <br /> Priority
+                  02 Priority
                 </span>
                 <span className="block text-xl font-medium text-slate-900 tracking-normal">
                   {project.priority}
