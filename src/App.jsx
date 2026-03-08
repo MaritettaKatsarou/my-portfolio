@@ -301,7 +301,7 @@ const ProjectDetail = () => {
 const LogoSVG = () => (
   <svg 
     viewBox="0 0 498 498" 
-    className="w-64 h-64 md:w-80 md:h-80 fill-slate-900 transition-all duration-500 ease-out 
+    className="w-64 h-64 md:w-80 md:h-80 fill-slate-300 transition-all duration-500 ease-out 
                drop-shadow-md group-hover:drop-shadow-2xl group-hover:fill-blue-600"
     xmlns="http://www.w3.org/2000/svg"
   >
@@ -336,17 +336,13 @@ const About = () => (
 
     {/* RIGHT COLUMN: FLOATING LOGO */}
     <div className="w-full flex justify-center md:justify-end md:pt-12">
-      {/* Wrapper: 
-          - Removed background and borders.
-          - 'group' allows us to trigger the SVG color change.
-          - '-translate-y-4' creates the lift.
-      */}
-      <div className="group transition-all duration-500 ease-out hover:-translate-y-4 cursor-pointer">
+      
+      <div className="group transition-all duration-500 ease-out hover:-translate-y-1 cursor-pointer">
         <LogoSVG />
         
         {/* Optional: Minimalist floating tag underneath */}
         <p className="mt-8 font-mono text-[10px] uppercase tracking-[0.3em] text-slate-300 text-center transition-colors group-hover:text-blue-500">
-          // core_system_v1.0
+          // my-portfolio-logo
         </p>
       </div>
     </div>
