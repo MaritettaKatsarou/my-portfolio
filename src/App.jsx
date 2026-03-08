@@ -301,7 +301,7 @@ const ProjectDetail = () => {
 const LogoSVG = () => (
   <svg 
     viewBox="0 0 498 498" 
-    className="w-64 h-64 md:w-80 md:h-80 fill-slate-300 transition-all duration-500 ease-out 
+    className="w-64 h-64 md:w-80 md:h-80 fill-slate-100 transition-all duration-500 ease-out 
                drop-shadow-md group-hover:drop-shadow-2xl group-hover:fill-blue-600"
     xmlns="http://www.w3.org/2000/svg"
   >
