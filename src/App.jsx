@@ -335,7 +335,7 @@ const About = () => (
     </div>
 
     {/* RIGHT COLUMN: FLOATING LOGO */}
-    <div className="w-full flex justify-center md:justify-end md:pt-12">
+    <div className="w-full flex justify-center md:justify-end md:pt-0">
       
       <div className="group transition-all duration-500 ease-out hover:-translate-y-1 cursor-pointer">
         <LogoSVG />
