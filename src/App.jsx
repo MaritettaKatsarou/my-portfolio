@@ -220,9 +220,19 @@ const ProjectDetail = () => {
               <h3 className="font-mono font-semibold text-[12px] uppercase tracking-[0.20em] text-slate-400">
                 Project Status
               </h3>
-              <span className={`text-[12px] font-bold px-2 py-0.5 rounded-sm uppercase tracking-wider 
-                ${project.status === 'Active' ? 'bg-green-50 text-green-600' :
-                  project.status === 'Completed' ? 'bg-blue-50 text-blue-600' : 'bg-slate-100 text-slate-500'}`}>
+              <span className={`flex items-center gap-2 text-[12px] font-bold px-3 py-1 rounded-full uppercase tracking-wider 
+  ${project.status === 'Active'
+                  ? 'bg-green-50 text-green-600'
+                  : 'bg-blue-50 text-blue-600'}`}>
+
+                {/* The Pulsing Dot */}
+                {project.status === 'Active' && (
+                  <span className="relative flex h-2 w-2">
+                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+                    <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
+                  </span>
+                )}
+
                 {project.status}
               </span>
             </div>
