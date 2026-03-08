@@ -256,9 +256,9 @@ const ProjectDetail = () => {
                 <div className="flex items-baseline gap-2">
                   <span className="text-4xl font-light tracking-tighter text-slate-900">{project.progress}%</span>
                 </div>
-                <div className="h-1 w-full bg-slate-100 overflow-hidden">
+                <div className="h-1 w-full bg-slate-100 rounded-full overflow-hidden">
                   <div
-                    className="h-full bg-blue-600 transition-all duration-1000"
+                    className="h-full bg-blue-600 rounded-full transition-all duration-1000"
                     style={{ width: `${project.progress}%` }}
                   />
                 </div>
@@ -266,7 +266,7 @@ const ProjectDetail = () => {
 
               {/* Priority Metric */}
               <div className="space-y-3">
-                <span className="block text-[12px] font-mono text-slate-400 uppercase tracking-widest">02 Priority</span>
+                <span className="block text-[12px] font-mono text-slate-400 uppercase tracking-widest">02 <br /> Priority</span>
                 <span className="block text-xl font-medium text-slate-900 tracking-normal">
                   {project.priority}
                 </span>
