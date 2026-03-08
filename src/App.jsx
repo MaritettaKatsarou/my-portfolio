@@ -220,17 +220,27 @@ const ProjectDetail = () => {
               <h3 className="font-mono font-semibold text-[12px] uppercase tracking-[0.20em] text-slate-400">
                 Project Status
               </h3>
-              <span className={`flex items-center gap-2 text-[12px] font-bold px-3 py-1 rounded-full uppercase tracking-wider 
-  ${project.status === 'Active'
-                  ? 'bg-green-50 text-green-600'
-                  : 'bg-blue-50 text-blue-600'}`}>
+              {/* --- UNIFIED STATUS PILL --- */}
+              <span className={`flex items-center gap-2 text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-wider 
+  ${project.status === 'Active' ? 'bg-green-50 text-green-600' :
+                  project.status === 'Completed' ? 'bg-blue-50 text-blue-600' :
+                    project.status === 'Planned' ? 'bg-slate-100 text-slate-500' :
+                      project.status === 'Backlog' ? 'bg-orange-50 text-orange-600' :
+                        'bg-slate-50 text-slate-400'}`}>
 
-                {/* The Pulsing Dot */}
+                {/* Pulsing Indicator: Only rendered if status is Active */}
                 {project.status === 'Active' && (
                   <span className="relative flex h-2 w-2">
                     <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
                     <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
                   </span>
+                )}
+
+                {/* Static Dot: Rendered for other states to keep spacing consistent (Optional) */}
+                {project.status !== 'Active' && (
+                  <span className={`h-2 w-2 rounded-full ${project.status === 'Completed' ? 'bg-blue-500' :
+                      project.status === 'Backlog' ? 'bg-orange-500' : 'bg-slate-400'
+                    }`}></span>
                 )}
 
                 {project.status}
