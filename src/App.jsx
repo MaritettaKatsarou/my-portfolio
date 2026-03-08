@@ -239,7 +239,7 @@ const ProjectDetail = () => {
                 {/* Static Dot: Rendered for other states to keep spacing consistent (Optional) */}
                 {project.status !== 'Active' && (
                   <span className={`h-2 w-2 rounded-full ${project.status === 'Completed' ? 'bg-blue-500' :
-                      project.status === 'Backlog' ? 'bg-orange-500' : 'bg-slate-400'
+                    project.status === 'Backlog' ? 'bg-orange-500' : 'bg-slate-400'
                     }`}></span>
                 )}
 
@@ -248,7 +248,7 @@ const ProjectDetail = () => {
             </div>
 
             {/* METADATA GRID */}
-            <div className="grid grid-cols-2 gap-y-8 gap-x-12">
+            <div className="grid grid-cols-2 gap-y-8 gap-x-14">
 
               {/* Completion Metric */}
               <div className="space-y-3">
@@ -298,7 +298,21 @@ const ProjectDetail = () => {
   );
 };
 
-// ... (About, Contact, Test components remain same as your previous App.jsx)
+const LogoSVG = () => (
+  <svg
+    viewBox="0 0 498 498"
+    className="w-32 h-32 fill-slate-900 transition-colors duration-500 group-hover:fill-blue-600"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    {/* merged the two paths into this structure for efficiency */}
+    <path
+      fillRule="evenodd"
+      clipRule="evenodd"
+      d="M249 0C386.519 0 ... ... H50.7979V254Z"
+    />
+  </svg>
+);
+
 const About = () => (
   <section className="grid grid-cols-1 md:grid-cols-2 gap-16 items-start animate-in fade-in duration-700">
     <div className="max-w-2xl">
@@ -306,6 +320,7 @@ const About = () => (
       <p className="text-lg text-slate-700 mb-6">
         My background in <strong>Systems Design Engineering</strong> taught me how to handle complexity. My move into <strong>UX/UI</strong> is about making that complexity invisible to the user.
       </p>
+
       <div className="grid grid-cols-2 gap-8 py-8 border-y border-slate-100">
         <div>
           <h4 className="font-mono text-xs text-blue-600 uppercase mb-2">Systems Mindset</h4>
@@ -317,9 +332,20 @@ const About = () => (
         </div>
       </div>
     </div>
+
+    {/* LOGO COLUMN: With Lift & Shadow Effects */}
     <div className="w-full flex justify-end">
-      <div className="w-full max-w-[340px] aspect-[3/4] bg-slate-50 border border-slate-100 rounded-sm flex items-end p-6 text-slate-300 font-mono text-[10px] uppercase tracking-widest hover:border-slate-200 transition-colors">
-        [ image_01.png ]
+      {/* This container has group, standard shadow, transition, lift, and hover effects */}
+      <div className="group relative w-full max-w-[340px] aspect-[3/4] bg-white border border-slate-100 rounded-xl flex flex-col items-center justify-center p-6 transition-all duration-500 ease-out 
+                      shadow-sm hover:shadow-xl hover:-translate-y-3 hover:border-slate-200">
+
+        {/* The component from Step 1 */}
+        <LogoSVG />
+
+        {/* The bottom tagline that turns blue on hover */}
+        <div className="absolute bottom-6 left-6 font-mono text-[10px] uppercase tracking-widest text-slate-300 transition-colors group-hover:text-blue-500">
+          [ system_identity_v1.0 ]
+        </div>
       </div>
     </div>
   </section>
