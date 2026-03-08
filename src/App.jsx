@@ -246,7 +246,7 @@ const ProjectDetail = () => {
             </div>
 
             {/* METADATA GRID */}
-            <div className="grid grid-cols-2 gap-y-8 gap-x-14">
+            <div className="grid grid-cols-2 gap-y-8 gap-x-16">
               {/* Completion Metric */}
               <div className="space-y-3">
                 <span className="block text-[12px] font-mono text-slate-400 uppercase tracking-widest">01 Completion</span>
