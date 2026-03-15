@@ -118,6 +118,7 @@ const Works = () => {
 
   return (
     <div className="flex flex-col md:flex-row gap-12 animate-in fade-in">
+      {/* Sidebar Filters */}
       <aside className="w-full md:w-64 space-y-8">
         <h2 className="text-2xl font-bold tracking-tighter text-slate-900 border-b border-slate-100 pb-2">Filters</h2>
         <div className="flex flex-row flex-wrap md:flex-col gap-8">
@@ -125,7 +126,13 @@ const Works = () => {
             <h4 className="text-[10px] font-bold uppercase tracking-widest text-slate-400 mb-4 italic">Category</h4>
             <div className="flex flex-col gap-2">
               {categories.map(cat => (
-                <button key={cat} onClick={() => setFilterCategory(cat)} className={`text-left text-sm py-1 transition-all ${filterCategory === cat ? 'text-blue-600 font-bold translate-x-1' : 'text-slate-500 hover:text-slate-900'}`}>{cat}</button>
+                <button 
+                  key={cat} 
+                  onClick={() => setFilterCategory(cat)} 
+                  className={`text-left text-sm py-1 transition-all ${filterCategory === cat ? 'text-blue-600 font-bold translate-x-1' : 'text-slate-500 hover:text-slate-900'}`}
+                >
+                  {cat}
+                </button>
               ))}
             </div>
           </div>
@@ -133,24 +140,57 @@ const Works = () => {
             <h4 className="text-[10px] font-bold uppercase tracking-widest text-slate-400 mb-4 italic">Status</h4>
             <div className="flex flex-col gap-2">
               {statuses.map(stat => (
-                <button key={stat} onClick={() => setFilterStatus(stat)} className={`text-left text-sm py-1 transition-all ${filterStatus === stat ? 'text-blue-600 font-bold translate-x-1' : 'text-slate-500 hover:text-slate-900'}`}>{stat}</button>
+                <button 
+                  key={stat} 
+                  onClick={() => setFilterStatus(stat)} 
+                  className={`text-left text-sm py-1 transition-all ${filterStatus === stat ? 'text-blue-600 font-bold translate-x-1' : 'text-slate-500 hover:text-slate-900'}`}
+                >
+                  {stat}
+                </button>
               ))}
             </div>
           </div>
         </div>
       </aside>
+
+      {/* Project Grid */}
       <div className="flex-grow grid grid-cols-1 lg:grid-cols-2 gap-6">
         {filteredProjects.map((proj) => (
           <Link key={proj.id} to={`/works/${proj.id}`} className="block group">
+            {/* The Restored Card Styling */}
             <div className="bg-transparent border border-slate-100 rounded-2xl p-6 shadow-sm transition-all duration-500 ease-out hover:bg-white hover:border-slate-200 hover:shadow-lg hover:shadow-slate-200/50 hover:-translate-y-1">
+              
               <div className="flex justify-between items-start mb-6">
-                <div className="p-2.5 bg-slate-50 rounded-xl border border-slate-100">{categoryIcons[proj.category] || categoryIcons["Default"]}</div>
-                <span className={`text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-wider flex items-center gap-1.5 ${proj.status === 'Active' ? 'bg-green-50 text-green-600' : proj.status === 'Completed' ? 'bg-blue-50 text-blue-600' : 'bg-slate-100 text-slate-500'}`}>
+                {/* Category Icon */}
+                <div className="p-2.5 bg-slate-50 rounded-xl border border-slate-100">
+                  {categoryIcons[proj.category] || categoryIcons["Default"]}
+                </div>
+                
+                {/* Status Pill with Pulse */}
+                <span className={`text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-wider flex items-center gap-1.5
+                  ${proj.status === 'Active' ? 'bg-green-50 text-green-600' :
+                    proj.status === 'Completed' ? 'bg-blue-50 text-blue-600' :
+                      proj.status === 'Backlog' ? 'bg-orange-50 text-orange-600' : 'bg-slate-100 text-slate-500'}`}>
+                  <span className={`h-1.5 w-1.5 rounded-full ${proj.status === 'Active' ? 'bg-green-500 animate-pulse' : 'bg-current'}`}></span>
                   {proj.status}
                 </span>
               </div>
+
               <h3 className="font-bold text-xl mb-2 group-hover:text-blue-600 transition-colors">{proj.title}</h3>
               <p className="text-sm text-slate-500 mb-6 line-clamp-2">{proj.description}</p>
+
+              {/* Metadata Grid */}
+              <div className="grid grid-cols-2 gap-4 text-[12px] font-medium text-slate-400">
+                <div className="flex items-center gap-2">
+                  {/* We clone the icon to make it smaller for the footer */}
+                  {React.cloneElement(categoryIcons[proj.category] || categoryIcons["Default"], { size: 14, className: "text-slate-400" })}
+                  {proj.category}
+                </div>
+                <div className="flex items-center gap-2">
+                  <Clock size={14} /> {proj.date}
+                </div>
+              </div>
+
             </div>
           </Link>
         ))}
