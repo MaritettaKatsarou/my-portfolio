@@ -1,13 +1,12 @@
-import React, { useMemo, Suspense, useState, useEffect } from 'react'; // Added useEffect
+import React, { useMemo, Suspense, useState } from 'react';
 import { HashRouter as BrowserRouter, Routes, Route, Link, useNavigate, useParams } from 'react-router-dom';
-import {
-  Menu, X, Folder, Clock, CheckCircle2, Layout,
-  BookOpen, Search, Cpu, Box, Palette
+import { 
+  Menu, X, Folder, Clock, CheckCircle2, Layout, 
+  BookOpen, Search, Cpu, Box, Palette 
 } from 'lucide-react';
 import { Canvas } from '@react-three/fiber';
-import { useGLTF, OrbitControls } from '@react-three/drei';
+import { useGLTF, OrbitControls, Environment } from '@react-three/drei';
 import * as THREE from 'three';
-
 
 // --- 1. DATA ARCHITECTURE ---
 const ALL_PROJECTS = [
@@ -70,31 +69,22 @@ const categoryIcons = {
 };
 
 // --- 2. THE 3D MODEL ENGINE ---
-
 function Model({ color }) {
   const { nodes } = useGLTF(`${import.meta.env.BASE_URL}extra.glb`);
-
   return (
     <group dispose={null}>
-      <mesh 
-        geometry={nodes.extra19042024.geometry} 
-        scale={0.05}
-      >
-        {/* Using meshStandardMaterial directly ensures the color is applied 
-            even if the original GLB material is corrupted or missing */}
+      <mesh geometry={nodes.extra19042024.geometry} scale={0.05}>
         <meshStandardMaterial 
           color={new THREE.Color(color)} 
-          roughness={0.3}
-          metalness={0.8}
+          roughness={0.3} 
+          metalness={0.8} 
         />
       </mesh>
     </group>
   );
 }
 
-useGLTF.preload(`${import.meta.env.BASE_URL}extra.glb`);
-
-// --- 3. UI COMPONENTS (LOGO, HOME, WORKS, ETC) ---
+// --- 3. COMPONENTS ---
 
 const LogoSVG = () => (
   <svg viewBox="0 0 498 498" className="w-64 h-64 md:w-80 md:h-80 fill-slate-200 transition-all duration-500 ease-out group-hover:drop-shadow-sm group-hover:fill-slate-900" xmlns="http://www.w3.org/2000/svg">
@@ -178,15 +168,69 @@ const ProjectDetail = () => {
   return (
     <section className="animate-in fade-in slide-in-from-bottom-4 duration-700 max-w-5xl mx-auto">
       <button onClick={() => navigate('/works')} className="text-xs font-mono uppercase tracking-widest text-blue-600 mb-12 flex items-center gap-2 hover:gap-4 transition-all">← Back to Works</button>
-      <h2 className="text-5xl font-bold tracking-tighter mb-8">{project.title}</h2>
-      <p className="text-xl text-slate-600 leading-relaxed mb-10">{project.description}</p>
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-16">
+        <div className="lg:col-span-7">
+          <h2 className="text-5xl font-bold tracking-tighter mb-8">{project.title}</h2>
+          <div className="flex items-center gap-3 mb-6">
+            <span className="text-[10px] font-bold uppercase tracking-[0.3em] text-blue-600 italic">{project.category}</span>
+            <span className="h-px w-8 bg-slate-200"></span>
+            <span className="text-[10px] font-mono text-slate-400 uppercase">{project.date}</span>
+          </div>
+          <p className="text-xl text-slate-600 leading-relaxed mb-10">{project.description}</p>
+          <div className="space-y-6">
+            <h4 className="font-bold text-sm uppercase tracking-widest border-b border-slate-100 pb-2">The Challenge</h4>
+            <p className="text-slate-700 leading-relaxed">{project.challenge}</p>
+          </div>
+        </div>
+        <div className="lg:col-span-5">
+           <div className="lg:sticky lg:top-32 ml-0 lg:ml-8 pl-0 lg:pl-6 py-12 lg:py-2 border-t lg:border-t-0 lg:border-l-2 border-slate-100 mt-12 lg:mt-0">
+             <h3 className="font-mono font-semibold text-[12px] uppercase tracking-[0.20em] text-slate-400 mb-8">Project Statistics</h3>
+             <div className="space-y-8">
+               <div>
+                  <span className="block text-[12px] font-mono text-slate-400 uppercase tracking-widest mb-2">01 Completion</span>
+                  <span className="text-4xl font-light tracking-tighter text-slate-900">{project.progress}%</span>
+               </div>
+               <div>
+                  <span className="block text-[12px] font-mono text-slate-400 uppercase tracking-widest mb-2">02 Priority</span>
+                  <span className="text-xl font-medium text-slate-900">{project.priority}</span>
+               </div>
+             </div>
+           </div>
+        </div>
+      </div>
     </section>
   );
 };
 
+const About = () => (
+  <section className="grid grid-cols-1 md:grid-cols-2 gap-16 items-start animate-in fade-in duration-700">
+    <div className="max-w-2xl">
+      <h2 className="text-3xl font-bold mb-8 italic">The Evolution.</h2>
+      <p className="text-lg text-slate-700 mb-6">
+        My background in <strong>Systems Design Engineering</strong> taught me how to handle complexity. My move into <strong>UX/UI</strong> is about making that complexity invisible to the user.
+      </p>
+      <div className="grid grid-cols-2 gap-8 py-8 border-y border-slate-100">
+        <div>
+          <h4 className="font-mono text-xs text-blue-600 uppercase mb-2">Systems Mindset</h4>
+          <p className="text-sm text-slate-500">Scalability, architecture, and logic-driven workflows.</p>
+        </div>
+        <div>
+          <h4 className="font-mono text-xs text-blue-600 uppercase mb-2">Design Craft</h4>
+          <p className="text-sm text-slate-500">Visual hierarchy, empathy, and pixel-perfect execution.</p>
+        </div>
+      </div>
+    </div>
+    <div className="w-full flex justify-center md:justify-end">
+      <div className="group transition-all duration-500 ease-out hover:-translate-y-1 cursor-pointer">
+        <LogoSVG />
+        <p className="mt-8 font-mono text-[10px] uppercase tracking-[0.3em] text-slate-300 text-center group-hover:text-slate-900">// my-portfolio-logo</p>
+      </div>
+    </div>
+  </section>
+);
+
 const Lab = () => {
   const [modelColor, setModelColor] = useState('#2563eb');
-  
   const colors = [
     { name: 'System Blue', value: '#2563eb' },
     { name: 'Core Slate', value: '#475569' },
@@ -200,21 +244,14 @@ const Lab = () => {
       <div className="flex justify-between items-end mb-8">
         <div>
           <h2 className="text-5xl font-bold tracking-tighter mb-2 italic">System Lab.</h2>
-          <p className="font-mono text-xs text-slate-400 uppercase tracking-widest">// Interactive 3D Architecture Shell</p>
+          <p className="text-xs font-mono text-slate-400 uppercase tracking-widest">// Interactive 3D Architecture Shell</p>
         </div>
-        
-        {/* COLOR PICKER UI */}
-        <div className="flex gap-2 bg-slate-50 p-3 rounded-2xl border border-slate-100">
+        <div className="flex gap-2 p-2 bg-slate-50/50 rounded-full border border-slate-100">
           {colors.map((c) => (
             <button
               key={c.value}
-              onClick={() => {
-                console.log("Changing color to:", c.value); // Debug log
-                setModelColor(c.value);
-              }}
-              className={`w-6 h-6 rounded-full border-2 transition-all hover:scale-110 ${
-                modelColor === c.value ? 'border-slate-900 scale-110' : 'border-transparent'
-              }`}
+              onClick={() => setModelColor(c.value)}
+              className="w-6 h-6 rounded-full border-2 border-white shadow-sm transition-transform hover:scale-125"
               style={{ backgroundColor: c.value }}
               title={c.name}
             />
@@ -222,65 +259,56 @@ const Lab = () => {
         </div>
       </div>
 
-      <div className="flex-grow bg-slate-900 rounded-3xl overflow-hidden relative border-4 border-slate-100 shadow-2xl">
-        <Suspense fallback={<div className="absolute inset-0 flex items-center justify-center font-mono text-xs text-slate-500 uppercase">Initializing_Geometry...</div>}>
-          <Canvas
-            shadows
-            camera={{ position: [0, 0, 15], fov: 50 }}
-            gl={{ antialias: true, powerPreference: "high-performance" }}
-          >
-            <ambientLight intensity={3} />
-            <pointLight position={[10, 10, 10]} intensity={2} />
-            <spotLight position={[-10, 10, 10]} angle={0.15} penumbra={1} />
-
-            {/* We pass the color state here */}
-            <Model color={modelColor} />
-
-            <OrbitControls enablePan={true} enableZoom={true} />
-          </Canvas>
-        </Suspense>
+      <div className="flex-grow bg-[#0a0f1a] rounded-3xl overflow-hidden relative border border-slate-800 shadow-2xl">
+        <div className="absolute top-8 left-8 z-10 p-6 bg-[#121926]/80 backdrop-blur-md border border-slate-700/50 rounded-xl font-mono text-[10px] space-y-2 pointer-events-none">
+          <p className="text-blue-400">OBJECT: EXTRA_2024_SHELL</p>
+          <p className="text-green-400">STATUS: RENDER_ACTIVE</p>
+          <p className="text-slate-400 uppercase">HEX_CODE: {modelColor}</p>
+        </div>
         
-        <div className="absolute top-6 left-6 font-mono text-[10px] text-blue-500 space-y-1 bg-black/40 p-4 backdrop-blur-md rounded-lg">
-          <p>OBJECT: EXTRA_2024_SHELL</p>
-          <p>STATUS: RENDER_ACTIVE</p>
-          <p>HEX_CODE: {modelColor.toUpperCase()}</p>
+        <Canvas camera={{ position: [0, 0, 15], fov: 45 }}>
+          <Suspense fallback={null}>
+            <Environment preset="city" />
+            <ambientLight intensity={0.7} />
+            <directionalLight position={[10, 10, 5]} intensity={1.5} />
+            <Model color={modelColor} />
+            <OrbitControls enableZoom={true} />
+          </Suspense>
+        </Canvas>
+
+        <div className="absolute bottom-8 right-8 text-[10px] font-mono text-slate-500 uppercase tracking-[0.2em] pointer-events-none">
+          [ Drag to rotate // Scroll to zoom ]
         </div>
       </div>
     </section>
   );
 };
 
-// --- 4. MAIN APP ENTRY ---
+// --- 4. MAIN LAYOUT AND APP ---
 export default function App() {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const navItems = [
-    { name: '/', label: 'home' },
-    { name: '/works', label: 'works' },
-    { name: '/lab', label: 'lab' },
-    { name: '/about', label: 'about me' },
-    { name: '/contact', label: 'contact' }
-  ];
-
   return (
     <BrowserRouter>
-      <div className="min-h-screen bg-white text-slate-900 selection:bg-blue-100 flex flex-col">
-        <nav className="fixed top-0 w-full h-20 flex items-center justify-between px-8 md:px-16 bg-white/60 backdrop-blur-lg z-50 shadow-sm">
-          <Link to="/" className="font-bold tracking-tighter text-xl">My-portfolio</Link>
-          <div className="hidden md:flex gap-8 text-[11px] font-bold uppercase tracking-[0.2em] items-center">
-            {navItems.map((item) => (
-              <Link key={item.name} to={item.name} className="text-slate-400 hover:text-blue-600 transition-colors">{item.label}</Link>
-            ))}
+      <div className="min-h-screen bg-white text-slate-900 font-sans selection:bg-blue-100 selection:text-blue-900">
+        <nav className="fixed top-0 w-full z-50 bg-white/80 backdrop-blur-md border-b border-slate-50">
+          <div className="max-w-7xl mx-auto px-6 h-20 flex justify-between items-center">
+            <Link to="/" className="font-bold text-xl tracking-tighter hover:text-blue-600 transition-colors">My-portfolio</Link>
+            <div className="hidden md:flex gap-10 text-[11px] font-bold uppercase tracking-widest text-slate-400">
+              <Link to="/" className="hover:text-slate-900 transition-colors">Home</Link>
+              <Link to="/works" className="hover:text-slate-900 transition-colors">Works</Link>
+              <Link to="/lab" className="hover:text-slate-900 transition-colors">Lab</Link>
+              <Link to="/about" className="hover:text-slate-900 transition-colors">About Me</Link>
+            </div>
+            <Link to="/contact" className="px-6 py-2 bg-slate-50 border border-slate-100 rounded-full text-[11px] font-bold uppercase tracking-widest hover:bg-slate-900 hover:text-white transition-all">Contact</Link>
           </div>
         </nav>
 
-        <main className="pt-40 px-8 md:px-16 pb-20 max-w-6xl mx-auto flex-grow w-full">
+        <main className="max-w-7xl mx-auto px-6 pt-40 pb-20">
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/works" element={<Works />} />
             <Route path="/works/:projectId" element={<ProjectDetail />} />
             <Route path="/lab" element={<Lab />} />
-            <Route path="/about" element={<div>About Me Section</div>} />
-            <Route path="/contact" element={<div>Contact Section</div>} />
+            <Route path="/about" element={<About />} />
           </Routes>
         </main>
       </div>
