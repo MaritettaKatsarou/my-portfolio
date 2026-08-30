@@ -10,11 +10,11 @@ export default function AboutPage() {
         </p>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 py-8 border-y border-slate-100">
           <div>
-            <h2 className="font-mono text-xs text-blue-600 uppercase mb-2">Systems Mindset</h2>
+            <h2 className="font-mono text-xs text-brand-accent uppercase mb-2">Systems Mindset</h2>
             <p className="text-sm text-slate-500">Scalability, architecture, and logic-driven workflows.</p>
           </div>
           <div>
-            <h2 className="font-mono text-xs text-blue-600 uppercase mb-2">Design Craft</h2>
+            <h2 className="font-mono text-xs text-brand-accent uppercase mb-2">Design Craft</h2>
             <p className="text-sm text-slate-500">Visual hierarchy, empathy, and pixel-perfect execution.</p>
           </div>
         </div>
@@ -22,7 +22,7 @@ export default function AboutPage() {
       <div className="w-full flex justify-center md:justify-end">
         <div className="group transition-all duration-500 ease-out hover:-translate-y-1">
           <LogoSVG />
-          <p className="mt-8 font-mono text-[10px] uppercase tracking-[0.3em] text-slate-300 text-center group-hover:text-slate-900">// my-portfolio-logo</p>
+          <p className="mt-8 font-mono text-[10px] uppercase tracking-[0.3em] text-slate-300 text-center group-hover:text-brand-foreground">// my-portfolio-logo</p>
         </div>
       </div>
     </section>

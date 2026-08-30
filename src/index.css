@@ -1,7 +1,21 @@
 @import "tailwindcss";
 
+:root {
+  --color-background: #ffffff;
+  --color-foreground: #252525;
+  --color-accent: #ff3b69;
+  --color-highlight: #ffc96b;
+}
+
+@theme inline {
+  --color-brand-background: var(--color-background);
+  --color-brand-foreground: var(--color-foreground);
+  --color-brand-accent: var(--color-accent);
+  --color-brand-highlight: var(--color-highlight);
+}
+
 :where(a, button, [tabindex]):focus-visible {
-  outline: 3px solid #2563eb;
+  outline: 3px solid var(--color-accent);
   outline-offset: 3px;
 }
 
@@ -15,8 +29,8 @@
   align-items: center;
   padding: 0.5rem 1rem;
   border-radius: 0.5rem;
-  background: #0f172a;
-  color: #fff;
+  background: var(--color-foreground);
+  color: var(--color-background);
   font-weight: 700;
   transform: translateY(-200%);
   transition: transform 150ms ease-out;

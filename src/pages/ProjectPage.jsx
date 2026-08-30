@@ -10,7 +10,7 @@ export default function ProjectPage() {
     return (
       <section className="pt-12 text-center">
         <h1 className="mb-6 text-4xl font-bold tracking-tighter">Project not found.</h1>
-        <Link to="/works" className="min-h-11 inline-flex items-center rounded-full border border-slate-200 px-6 py-2 text-sm font-bold text-slate-700 transition-colors hover:border-blue-200 hover:text-blue-600">
+        <Link to="/works" className="min-h-11 inline-flex items-center rounded-full border border-slate-200 px-6 py-2 text-sm font-bold text-slate-700 transition-colors hover:border-brand-accent/30 hover:text-brand-accent">
           Back to works
         </Link>
       </section>
@@ -19,12 +19,12 @@ export default function ProjectPage() {
 
   return (
     <section className="animate-in fade-in slide-in-from-bottom-4 duration-700 max-w-5xl mx-auto">
-      <button type="button" onClick={() => navigate('/works')} className="min-h-11 px-2 rounded-lg text-xs font-mono uppercase tracking-widest text-blue-600 mb-12 flex items-center gap-2 hover:gap-4 transition-all">← Back to Works</button>
+      <button type="button" onClick={() => navigate('/works')} className="min-h-11 px-2 rounded-lg text-xs font-mono uppercase tracking-widest text-brand-accent mb-12 flex items-center gap-2 hover:gap-4 transition-all">← Back to Works</button>
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-16">
         <div className="lg:col-span-7">
           <h1 className="text-4xl sm:text-5xl font-bold tracking-tighter mb-8">{project.title}</h1>
           <div className="flex items-center gap-3 mb-6">
-            <span className="text-[10px] font-bold uppercase tracking-[0.3em] text-blue-600 italic">{project.category}</span>
+            <span className="text-[10px] font-bold uppercase tracking-[0.3em] text-brand-accent italic">{project.category}</span>
             <span className="h-px w-8 bg-slate-200"></span>
             <span className="text-[10px] font-mono text-slate-400 uppercase">{project.date}</span>
           </div>
@@ -40,11 +40,11 @@ export default function ProjectPage() {
             <div className="space-y-8">
               <div>
                 <span className="block text-[12px] font-mono text-slate-400 uppercase tracking-widest mb-2">01 Completion</span>
-                <span className="text-4xl font-light tracking-tighter text-slate-900">{project.progress}%</span>
+                <span className="text-4xl font-light tracking-tighter text-brand-foreground">{project.progress}%</span>
               </div>
               <div>
                 <span className="block text-[12px] font-mono text-slate-400 uppercase tracking-widest mb-2">02 Priority</span>
-                <span className="text-xl font-medium text-slate-900">{project.priority}</span>
+                <span className="text-xl font-medium text-brand-foreground">{project.priority}</span>
               </div>
             </div>
           </div>

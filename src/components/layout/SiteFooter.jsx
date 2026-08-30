@@ -9,18 +9,18 @@ const footerNavigation = [
   { label: 'Contact', to: '/contact' },
 ]
 
-const footerNavClassName = ({ isActive }) => `min-h-11 inline-flex items-center text-sm transition-colors ${isActive ? 'font-semibold text-blue-600' : 'text-slate-600 hover:text-blue-600'}`
+const footerNavClassName = ({ isActive }) => `min-h-11 inline-flex items-center text-sm transition-colors ${isActive ? 'font-semibold text-brand-accent' : 'text-slate-600 hover:text-brand-accent'}`
 
 export default function SiteFooter() {
   const currentYear = new Date().getFullYear()
 
   return (
-    <footer className="mt-20 border-t border-slate-100 py-16 bg-white">
+    <footer className="mt-20 border-t border-slate-100 py-16 bg-brand-background">
       <div className="max-w-7xl mx-auto px-6">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
           <div className="md:col-span-2 space-y-6">
-            <div className="text-xl font-bold tracking-tighter text-slate-900">
-              {PROFILE.name} <span className="text-blue-600">— {PROFILE.targetRole}</span>
+            <div className="text-xl font-bold tracking-tighter text-brand-foreground">
+              {PROFILE.name} <span className="text-brand-accent">— {PROFILE.targetRole}</span>
             </div>
             <p className="text-sm text-slate-500 max-w-xs leading-relaxed">
               Building bridge-architectures between complex technical systems and
@@ -31,14 +31,14 @@ export default function SiteFooter() {
                 href={PROFILE_LINKS.linkedin}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="min-h-11 inline-flex items-center px-3 py-2 bg-slate-50 border border-slate-100 rounded-lg hover:text-blue-600 hover:border-blue-100 transition-all"
+                className="min-h-11 inline-flex items-center px-3 py-2 bg-slate-50 border border-slate-100 rounded-lg hover:text-brand-accent hover:border-brand-accent/20 transition-all"
               >
                 <span className="font-mono text-[10px] font-bold uppercase tracking-widest">LinkedIn</span>
                 <span className="sr-only"> (opens in a new tab)</span>
               </a>
               <a
                 href={PROFILE_LINKS.email}
-                className="min-h-11 inline-flex items-center px-3 py-2 bg-slate-50 border border-slate-100 rounded-lg hover:text-blue-600 hover:border-blue-100 transition-all"
+                className="min-h-11 inline-flex items-center px-3 py-2 bg-slate-50 border border-slate-100 rounded-lg hover:text-brand-accent hover:border-brand-accent/20 transition-all"
               >
                 <span className="font-mono text-[10px] font-bold uppercase tracking-widest">Email</span>
               </a>
@@ -46,7 +46,7 @@ export default function SiteFooter() {
                 href={PROFILE_LINKS.resume}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="min-h-11 inline-flex items-center px-3 py-2 bg-slate-50 border border-slate-100 rounded-lg hover:text-blue-600 hover:border-blue-100 transition-all"
+                className="min-h-11 inline-flex items-center px-3 py-2 bg-slate-50 border border-slate-100 rounded-lg hover:text-brand-accent hover:border-brand-accent/20 transition-all"
               >
                 <span className="font-mono text-[10px] font-bold uppercase tracking-widest">Résumé</span>
                 <span className="sr-only"> (opens in a new tab)</span>

@@ -3,16 +3,16 @@ import { Canvas } from '@react-three/fiber'
 import { Environment, OrbitControls } from '@react-three/drei'
 import Model from './Model.jsx'
 
-const colors = [
-  { name: 'System Blue', value: '#2563eb' },
-  { name: 'Core Slate', value: '#475569' },
-  { name: 'Active Green', value: '#10b981' },
-  { name: 'Warning Red', value: '#f43f5e' },
-  { name: 'Ghost White', value: '#f8fafc' },
-]
-
 export default function LabExperience() {
-  const [modelColor, setModelColor] = useState('#2563eb')
+  const brandAccent = getComputedStyle(document.documentElement).getPropertyValue('--color-accent').trim()
+  const colors = [
+    { name: 'System Accent', value: brandAccent },
+    { name: 'Core Slate', value: '#475569' },
+    { name: 'Active Green', value: '#10b981' },
+    { name: 'Highlight Yellow', value: '#ffc96b' },
+    { name: 'Ghost White', value: '#f8fafc' },
+  ]
+  const [modelColor, setModelColor] = useState(brandAccent)
 
   return (
     <section className="h-[70vh] flex flex-col animate-in fade-in duration-1000">
@@ -36,7 +36,7 @@ export default function LabExperience() {
 
       <div className="flex-grow bg-[#0a0f1a] rounded-3xl overflow-hidden relative border border-slate-800 shadow-2xl">
         <div className="absolute top-8 left-8 z-10 p-6 bg-[#121926]/80 backdrop-blur-md border border-slate-700/50 rounded-xl font-mono text-[10px] space-y-2 pointer-events-none">
-          <p className="text-blue-400">OBJECT: EXTRA_2024_SHELL</p>
+          <p className="text-brand-accent">OBJECT: EXTRA_2024_SHELL</p>
           <p className="text-green-400">STATUS: RENDER_ACTIVE</p>
           <p className="text-slate-400 uppercase">HEX_CODE: {modelColor}</p>
         </div>
