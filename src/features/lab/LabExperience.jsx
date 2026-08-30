@@ -18,8 +18,8 @@ export default function LabExperience() {
     <section className="h-[70vh] flex flex-col animate-in fade-in duration-1000">
       <div className="flex justify-between items-end mb-8">
         <div>
-          <h2 className="text-5xl font-bold tracking-tighter mb-2 italic">System Lab.</h2>
-          <p className="text-xs font-mono text-slate-400 uppercase tracking-widest">// Interactive 3D Architecture Shell</p>
+          <h2 className="text-5xl font-bold tracking-tighter italic">Digital Lab.</h2>
+          <p className="mt-14 text-xs font-mono text-slate-400 uppercase tracking-widest">// Interactive 3D Architecture Shell</p>
         </div>
         <div className="flex gap-2 p-2 bg-slate-50/50 rounded-full border border-slate-100">
           {colors.map((color) => (
