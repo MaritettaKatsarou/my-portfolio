@@ -26,17 +26,20 @@ export default function WorksPage() {
 
   return (
     <div className="flex flex-col md:flex-row gap-12 animate-in fade-in">
+      <h1 className="sr-only">Portfolio projects</h1>
       <aside className="w-full md:w-64 space-y-8">
         <h2 className="text-2xl font-bold tracking-tighter text-slate-900 border-b border-slate-100 pb-2">Filters</h2>
         <div className="flex flex-row flex-wrap md:flex-col gap-8">
           <div>
-            <h4 className="text-[10px] font-bold uppercase tracking-widest text-slate-400 mb-4 italic">Category</h4>
+            <h3 className="text-[10px] font-bold uppercase tracking-widest text-slate-400 mb-2 italic">Category</h3>
             <div className="flex flex-col gap-2">
               {categories.map((category) => (
                 <button
+                  type="button"
                   key={category}
                   onClick={() => setFilterCategory(category)}
-                  className={`text-left text-sm py-1 transition-all ${filterCategory === category ? 'text-blue-600 font-bold translate-x-1' : 'text-slate-500 hover:text-slate-900'}`}
+                  aria-pressed={filterCategory === category}
+                  className={`min-h-11 rounded-lg px-2 text-left text-sm transition-all ${filterCategory === category ? 'text-blue-600 font-bold translate-x-1' : 'text-slate-500 hover:text-slate-900'}`}
                 >
                   {category}
                 </button>
@@ -44,13 +47,15 @@ export default function WorksPage() {
             </div>
           </div>
           <div>
-            <h4 className="text-[10px] font-bold uppercase tracking-widest text-slate-400 mb-4 italic">Status</h4>
+            <h3 className="text-[10px] font-bold uppercase tracking-widest text-slate-400 mb-2 italic">Status</h3>
             <div className="flex flex-col gap-2">
               {statuses.map((status) => (
                 <button
+                  type="button"
                   key={status}
                   onClick={() => setFilterStatus(status)}
-                  className={`text-left text-sm py-1 transition-all ${filterStatus === status ? 'text-blue-600 font-bold translate-x-1' : 'text-slate-500 hover:text-slate-900'}`}
+                  aria-pressed={filterStatus === status}
+                  className={`min-h-11 rounded-lg px-2 text-left text-sm transition-all ${filterStatus === status ? 'text-blue-600 font-bold translate-x-1' : 'text-slate-500 hover:text-slate-900'}`}
                 >
                   {status}
                 </button>
@@ -77,7 +82,7 @@ export default function WorksPage() {
                 </span>
               </div>
 
-              <h3 className="font-bold text-xl mb-2 group-hover:text-blue-600 transition-colors">{project.title}</h3>
+              <h2 className="font-bold text-xl mb-2 group-hover:text-blue-600 transition-colors">{project.title}</h2>
               <p className="text-sm text-slate-500 mb-6 line-clamp-2">{project.description}</p>
 
               <div className="grid grid-cols-2 gap-4 text-[12px] font-medium text-slate-400">
